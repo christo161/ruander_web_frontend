@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.10. Kovács Ádám feladat5</title>
+</head>
+<body>
+    <form action="">
+        <label for="num">Szám:</label><br>
+        <input type="number" id="num">
+        <br>
+        <label for="div">Osztó:</label><br>
+        <input type="number" id="div">
+        <br>
+        <button id="btn_send">Elküld</button>
+        <br>
+    </form>
+    <p>Eredmény:</p>
+    <form action="">
+        <label for="result">Oszthatóság:</label><br>
+        <output id="result"></output>
+        <br>
+    </form>
+    <script>
+        function task_1(event) {
+            //ez ahhoz kell, hogy ne frissitsen gombnyomas utan
+            event.preventDefault();
+
+            let num = parseInt(document.querySelector("#num").value);
+
+            let div = parseInt(document.querySelector("#div").value);
+
+            let result = false;
+
+            if (num % div == 0 ) {
+                result = true;
+
+            } else  {
+                result = false;
+            }
+
+            let result_html = document.querySelector("#result");
+
+            if (result) {
+                result_html.innerHTML = "osztható";
+            } else {
+                result_html.innerHTML = "nem osztható";
+            }
+            
+        }
+
+        let button = document.querySelector("#btn_send");
+        button.addEventListener("click", task_1);
+    </script>
+</body>
+</html>

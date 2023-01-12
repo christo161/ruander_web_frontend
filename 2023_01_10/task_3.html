@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.10. Kovács Ádám feladat3</title>
+</head>
+<body>
+    <form action="">
+        <label for="min">Alsó határ:</label><br>
+        <input type="number" id="min">
+        <br>
+        <label for="max">Felső határ:</label><br>
+        <input type="number" id="max">
+        <br>
+        <button id="btn_send">Elküld</button>
+        <br>
+    </form>
+    <p>Eredmény:</p>
+    <form action="">
+        <label for="result">Random szám:</label><br>
+        <output id="result"></output>
+        <br>
+    </form>
+    <script>
+        function task_1(event) {
+            //ez ahhoz kell, hogy ne frissitsen gombnyomas utan
+            event.preventDefault();
+
+            let min = parseInt(document.querySelector("#min").value);
+
+            let max = parseInt(document.querySelector("#max").value);
+
+            let result = Math.floor(Math.random() * (max - min + 1) + min);
+
+            if (result % 2 != 0) {
+                if (result == max) {
+                    --result;
+                } else {
+                    ++result;
+                }
+            }
+
+            document.querySelector("#result").innerHTML = result+"";
+        }
+
+        let button = document.querySelector("#btn_send");
+        button.addEventListener("click", task_1);
+    </script>
+</body>
+</html>

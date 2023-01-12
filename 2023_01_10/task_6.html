@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.10. Kovács Ádám feladat6</title>
+</head>
+<body>
+    <form action="">
+        <button id="btn_send">Kiír</button>
+        <br>
+    </form>
+    <p>Eredmény:</p>
+    <form action="">
+        <label for="result">Első 10 négyszetszám:</label><br>
+        <output id="result"></output>
+        <br>
+    </form>
+    <script>
+        function task_1(event) {
+            //ez ahhoz kell, hogy ne frissitsen gombnyomas utan
+            event.preventDefault();
+
+            let numbers = "";
+
+            for (let i = 1;i<=10;++i) {
+                numbers += i*i + " ";
+            }
+
+            document.querySelector("#result").innerHTML = numbers;
+        }
+
+        let button = document.querySelector("#btn_send");
+        button.addEventListener("click", task_1);
+    </script>
+</body>
+</html>

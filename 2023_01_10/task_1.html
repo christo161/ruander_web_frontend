@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.10. Kovács Ádám feladat1</title>
+</head>
+<body>
+    <form action="">
+        <label for="name">Név:</label><br>
+        <input type="text" id="name">
+        <br>
+        <label for="group_id">CSoport azonosító:</label><br>
+        <input type="number" id="group_id" min="10" max="12">
+        <br>
+        <label for="html">HTML tudás:</label><br>
+        <input type="number" id="html" min="0" max="100">
+        <br>
+        <label for="css">CSS tudás:</label><br>
+        <input type="number" id="css" min="0" max="100">
+        <br>
+        <label for="js">JS tudás:</label><br>
+        <input type="number" id="js" min="0" max="100">
+        <br>
+        <button id="btn_send">Elküld</button>
+        <br>
+    </form>
+    <p>Eredmény:</p>
+    <form action="">
+        <label for="name_2">Név:</label><br>
+        <output id="name_2"></output>
+        <br>
+        <label for="group_id_2">CSoport azonosító:</label><br>
+        <output id="group_id_2"></output>
+        <br>
+        <label for="html_2">HTML tudás:</label><br>
+        <output id="html_2"></output>
+        <br>
+        <label for="css_2">CSS tudás:</label><br>
+        <output id="css_2"></output>
+        <br>
+        <label for="js">JS tudás:</label><br>
+        <output id="js_2"></output>
+        <br>
+    </form>
+    <script>
+        function task_1(event) {
+            //ez ahhoz kell, hogy ne frissitsen gombnyomas utan
+            event.preventDefault();
+
+            let name = document.querySelector("#name").value;
+            document.querySelector("#name_2").innerHTML = name;
+
+            let group_id = document.querySelector("#group_id").value;
+            document.querySelector("#group_id_2").innerHTML = group_id;
+
+            let html = document.querySelector("#html").value;
+            document.querySelector("#html_2").innerHTML = html;
+
+            let css = document.querySelector("#css").value;
+            document.querySelector("#css_2").innerHTML = css;
+
+            let js = document.querySelector("#js").value;
+            document.querySelector("#js_2").innerHTML = js;
+        }
+
+        let button = document.querySelector("#btn_send");
+        button.addEventListener("click", task_1);
+    </script>
+</body>
+</html>
