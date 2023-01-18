@@ -1,0 +1,120 @@
+<!-- basic algorithm example: filter, colorize, random strings more than 5 characters -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- programozási tétel: kiválogatás színezéssel, 5 karakternél hosszabb random stringek -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.18. Kovács Ádám, kiválogatás színezéssel, 5 karakternél hosszabb random stringek</title>
+</head>
+
+<body>
+    <script>
+        //generate random number
+        function generate_random_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        //initialize character sources
+        let ascii_chars = [];
+        for (let i = 32; i <= 126; ++i) {
+            ascii_chars.push(String.fromCharCode(i));
+        }
+        //escape characters
+        ascii_chars[0] = "&nbsp;";
+        ascii_chars[2] = "&quot;";
+        ascii_chars[6] = "&amp;";
+        ascii_chars[28] = "&lt;";
+        ascii_chars[30] = "&gt;";
+        ascii_chars[60] = "\\";
+        //the result will be (notice escape characters):
+        //ascii_chars = ["&nbsp;", "!", "&quot", "#", "$", "%", "&amp;", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "&lt;", "=", "&gt;", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~"];
+
+        //generate random string
+        let ascii_min_idx = 0;
+        let ascii_max_idx = ascii_chars.length - 1;
+        function generate_random_string(min, max) {
+            random_string = "";
+            string_size = generate_random_number(min, max);
+            for (let i = 0; i < string_size; ++i) {
+                random_string += ascii_chars[generate_random_number(ascii_min_idx, ascii_max_idx)];
+                //random_string += String.fromCharCode[generate_random_number(ascii_min_idx, ascii_max_idx)];
+            }
+            return random_string;
+        }
+        /*result example:
+        random_string = "sDtXJZ*R>";
+        */
+
+        //initialize array
+        let array_size = generate_random_number(2, 10); //min: 2, max: 10
+        let array_example = [];
+        //initialize array elements with random strings (minsize: 2, maxsize: 10)
+        for (let i = 0; i < array_size; ++i) {
+            array_example.push(generate_random_string(2, 10));
+        }
+        //test
+        /*
+        array_example.push("&lt;&lt;&lt;&lt;&lt;"); //5x "<"
+        array_example.push("&lt;&lt;&lt;&lt;&lt;&lt;"); //6x "<"
+        array_example.push("&nbsp;&nbsp;&nbsp;&lt;&nbsp;"); //3x " " + 1x "<" + 1x " "
+        array_example.push("&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;"); //4x " " + 1x "<" + 1x " "
+        */
+
+        //print array elements
+        document.write("Array size: " + array_size + "<br>");
+        document.write("Array elements:<br>");
+        //create a container, in order to handle its children
+        document.write("<span id='container'>");
+        //print pipeline-separated array elements (except the last)
+        for (let i = 0; i < array_example.length - 1; ++i) {
+            //put the elements into a span tag in order to handle their style
+            document.write("<span class='string'>" + array_example[i] + "</span><span class='separator'>&#124;&#124;</span>");
+        }
+        //print last element (without separator)
+        document.write("<span class='string'>" + array_example[array_example.length - 1] + "</span>");
+        //end of #container span
+        document.write("</span>");
+        //linebreak
+        document.write("<br>");
+        /*result example:
+        <span id="container">
+            <span class="string">2Sf@${(</span>
+            <span class='separator'>&#124;&#124;</span>
+            <span class="string">O?H-*+T</span>
+            <span class='separator'>&#124;&#124;</span>
+            <span class="string">4#0_ImX</span>
+        </span>
+        */
+
+        //filter (colorize strings with more than 5 characters)
+        //select <span id="container>...</span>
+        let container = document.querySelector("#container");
+        //get its children
+        let children = container.children;
+        //loop on children
+        for (let i = 0; i < children.length; ++i) {
+            let child = children[i];
+            //if the value of a child (between <span class="string"> and </span>) has more than 5 characters, set its color to blue
+            //notice that child.innerHTML.length and child.innerText.length are different
+            if (child.classList.contains("string") && child.innerText.length > 5) {
+                child.style.color = "blue";
+            }
+        }
+        document.write("<hr>");
+        document.write("Elements of the array which has more then 5 characters appear in <span style='color:blue;'>blue</span>.");
+        document.write("<br>");
+    </script>
+    <style>
+        .separator {
+            color: red;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,5 +1,8 @@
 <!-- basic algorithm example: filter, colorize -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
 <!-- programozási tétel: kiválogatás színezéssel -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
 <!DOCTYPE html>
 <html lang="hu">
 
@@ -7,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2023.01.17. Kovács Ádám, kiválogatás színezéssel</title>
+    <title>2023.01.17. Kovács Ádám, kiválogatás színezéssel, páros számok</title>
 </head>
 
 <body>
@@ -22,7 +25,7 @@
         let array_example = [];
         //initialize array elements with random numbers (min: 0, max: 100)
         for (let i = 0; i < array_size; ++i) {
-            array_example[i] = generate_random_number(0, 100);
+            array_example.push(generate_random_number(0, 100));
         }
 
         //print array elements
@@ -40,6 +43,8 @@
         document.write("<span>" + array_example[array_example.length - 1] + "</span>.");
         //end of #container span
         document.write("</span>");
+        //linebreak
+        document.write("<br>");
 
         /*result example:
         <span id="container">
@@ -47,10 +52,7 @@
         </span>
         */
 
-        //linebreak
-        document.write("<br>");
-
-        //filter (colorize result)
+        //filter (colorize even numbers)
         //select <span id="container>...</span>
         let container = document.querySelector("#container");
         //get its children
@@ -60,7 +62,7 @@
             let child = children[i];
             //if the value of a child (between <span> and </span>) is even, set its color to red
             //(worked without parseInt)
-            if (child.innerHTML % 2 == 0) {
+            if (child.innerText % 2 == 0) {
                 child.style.color = "red";
             }
         }
