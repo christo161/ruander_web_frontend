@@ -1,0 +1,58 @@
+<!-- exercise: pass the array with random numbers to an other function -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- feladat: random generált számokkal feltöltött tömb átadása egy másik függvénynek -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.19. Kovács Ádám, random generált számokkal feltöltött tömb átadása egy másik függvénynek</title>
+</head>
+
+<body>
+    <script>
+        //generate random number
+        function generate_random_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        //generate random array
+        function generate_random_array() {
+            let array_size = generate_random_number(2, 10);
+            let array_example = [];
+            for (let i = 0; i < array_size; ++i) {
+                array_example.push(generate_random_number(0, 100));
+            }
+            return array_example;
+        }
+
+        //print array
+        //p_array stands for parameter array
+        function print_array(p_array) {
+            document.write("Array size: " + p_array.length + "<br>");
+            document.write("Array elements:<br>");
+            for (let i = 0; i < p_array.length - 1; ++i) {
+                document.write(p_array[i] + ", ");
+            }
+            document.write(p_array[p_array.length - 1] + ".<br>");
+            document.write("<hr>");
+        }
+
+        //pass the array with random numbers to print_array function
+        document.write("array_example_1:<br>")
+        print_array(generate_random_array());
+
+        document.write("array_example_2:<br>")
+        print_array(generate_random_array());
+
+        document.write("array_example_3:<br>")
+        print_array(generate_random_array());
+    </script>
+
+</body>
+
+</html>
