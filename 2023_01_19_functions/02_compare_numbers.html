@@ -1,0 +1,42 @@
+<!-- exercise: compare random generated numbers -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- feladat: random generált számokkal összehasonlítása -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.20. Kovács Ádám, random generált számokkal összehasonlítása</title>
+</head>
+
+<body>
+    <script>
+        //random generate number
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        //compare numbers, print result
+        function num_compare(p_num1, p_num2) {
+            if (p_num1 > p_num2) {
+                document.write(`${p_num1} is greater than ${p_num2}<br>`);
+            } else if (p_num1 < p_num2) {
+                document.write(`${p_num1} is less than ${p_num2}<br>`);
+            } else {
+                document.write(`${p_num1} is equals to ${p_num2}<br>`);
+            }
+        }
+
+        //examples
+        document.write("Compare random generated numbers:<br>");
+        num_compare(random_generate_number(1, 100), random_generate_number(1, 100));
+        num_compare(random_generate_number(1, 100), random_generate_number(1, 100));
+        num_compare(random_generate_number(1, 100), random_generate_number(1, 100));
+    </script>
+</body>
+
+</html>

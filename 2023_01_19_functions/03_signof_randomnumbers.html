@@ -1,0 +1,41 @@
+<!-- exercise: print sign of random generated numbers -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- feladat: random generált számok előjelei -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.20. Kovács Ádám, random generált számok előjelei</title>
+</head>
+
+<body>
+    <script>
+        //random generate number
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        function print_number_sign(p_number) {
+            if (p_number > 0) {
+                document.write(`${p_number} is positive.<br>`);
+            } else if (p_number < 0) {
+                document.write(`${p_number} is negative.<br>`);
+            } else {
+                document.write(`${p_number} is zero.<br>`);
+            }
+        }
+
+        //examples
+        document.write("Sign of random generated numbers:<br>");
+        print_number_sign(random_generate_number(-10, 10));
+        print_number_sign(random_generate_number(-10, 10));
+        print_number_sign(random_generate_number(-10, 10));
+    </script>
+</body>
+
+</html>

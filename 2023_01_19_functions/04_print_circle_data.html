@@ -1,0 +1,49 @@
+<!-- exercise: circle perimeter, area -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- feladat: kör kerülete, területe -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.20. Kovács Ádám, kör kerülete, területe</title>
+</head>
+
+<body>
+    <script>
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        function circle_perimeter(p_radius) {
+            return (2 * p_radius * Math.PI).toFixed(2);
+        }
+
+        function circle_area(p_radius) {
+            return (p_radius ** 2 * Math.PI).toFixed(2);
+        }
+
+        function print_circle_data(p_radius) {
+            document.write("Radius: " + p_radius + "<br>");
+            document.write("Perimeter: " + circle_perimeter(p_radius) + "<br>");
+            document.write("Area: " + circle_area(p_radius) + "<br>");
+            document.write("<hr>");
+        }
+
+        //examples
+        document.write("Circle1:<br>");
+        print_circle_data(random_generate_number(1, 10));
+
+        document.write("Circle2:<br>");
+        print_circle_data(random_generate_number(1, 10));
+
+        document.write("Circle3:<br>");
+        print_circle_data(random_generate_number(1, 10));
+    </script>
+</body>
+
+</html>
