@@ -1,0 +1,44 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, halmazművelet, unió</title>
+</head>
+
+<body>
+    <div>Array1:</div>
+    <ul id="array1"></ul>
+    <div>Array2:</div>
+    <ul id="array2"></ul>
+    <div>Union:</div>
+    <ul id="union"></ul>
+    <script>
+        let array1 = [1, 2, 3, 4, 4, 5];
+        let array2 = [5, 5, 6, 7, 8, 9];
+
+        let union = [];
+
+        for (let i = 0; i < array1.length; ++i) {
+            if (!union.includes(array1[i])) {
+                union.push(array1[i]);
+            }
+        }
+
+        for (let i = 0; i < array2.length; ++i) {
+            if (!union.includes(array2[i])) {
+                union.push(array2[i]);
+            }
+        }
+
+        array1.map(item => document.querySelector("#array1").appendChild(document.createElement("li")).innerHTML = item);
+        array2.map(item => document.querySelector("#array2").appendChild(document.createElement("li")).innerHTML = item);
+        union.map(item => document.querySelector("#union").appendChild(document.createElement("li")).innerHTML = item);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, halmazművelet, metszet</title>
+</head>
+
+<body>
+    <div>Array1:</div>
+    <ul id="array1"></ul>
+    <div>Array2:</div>
+    <ul id="array2"></ul>
+    <div>intersection:</div>
+    <ul id="intersection"></ul>
+    <script>
+        let array1 = [1, 2, 3, 3, 4, 4, 5];
+        let array2 = [3, 3, 4, 5, 5, 6, 7, 8, 9];
+
+        let intersection = [];
+
+        for (let i = 0; i < array1.length; ++i) {
+            let includes_both = false;
+            for (let j = 0; j < array2.length; ++j) {
+                if (array1[i] == array2[j]) {
+                    includes_both = true;
+                }
+            }
+            let includes = false;
+            for (let j = 0; j < array2.length; ++j) {
+                if (array1[i] == intersection[j]) {
+                    includes = true;
+                }
+            }
+            if (includes_both && !includes) {
+                intersection.push(array1[i]);
+            }
+        }
+
+        array1.map(item => document.querySelector("#array1").appendChild(document.createElement("li")).innerHTML = item);
+        array2.map(item => document.querySelector("#array2").appendChild(document.createElement("li")).innerHTML = item);
+        intersection.map(item => document.querySelector("#intersection").appendChild(document.createElement("li")).innerHTML = item);
+    </script>
+</body>
+
+</html>
