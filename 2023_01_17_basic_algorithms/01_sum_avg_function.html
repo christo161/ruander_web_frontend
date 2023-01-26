@@ -1,0 +1,76 @@
+<!-- basic algorithm example: sum, avg -->
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+
+<!-- programozási tétel: összegzés, átlagszámítás -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2023.01.17. Kovács Ádám, összegzés, átlagszámítás</title>
+</head>
+
+<body>
+    <script>
+        //generate random number
+        function generate_random_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        //generate random array
+        function generate_random_array() {
+            let array_size = generate_random_number(2, 10);
+            let array_example = [];
+            for (let i = 0; i < array_size; ++i) {
+                array_example.push(generate_random_number(0, 100));
+            }
+            return array_example;
+        }
+
+        //print array
+        //p_array stands for parameter array
+        function print_array(p_array) {
+            document.write("Array size: " + p_array.length + "<br>");
+            document.write("Array elements:<br>");
+            for (let i = 0; i < p_array.length - 1; ++i) {
+                document.write(p_array[i] + ", ");
+            }
+            document.write(p_array[p_array.length - 1] + ".<br>");
+        }
+
+        function sum(p_array) {
+            let sum = 0;
+            for (let i = 0; i < p_array.length; ++i) {
+                sum += p_array[i];
+            }
+            return sum;
+        }
+
+        function avg(p_array) {
+            let sum = 0;
+            for (let i = 0; i < p_array.length; ++i) {
+                sum += p_array[i];
+            }
+            return sum/p_array.length;
+        }
+        
+        let array1 = generate_random_array();
+        document.write("Array1:<br>");
+        print_array(array1);
+        document.write("Sum: " + sum(array1) + "<br>");
+        document.write("Avg: " + avg(array1) + "<br>");
+        document.write("<hr>");
+
+        let array2 = generate_random_array();
+        document.write("Array2:<br>");
+        print_array(array2);
+        document.write("Sum: " + sum(array2) + "<br>");
+        document.write("Avg: " + avg(array2) + "<br>");
+        document.write("<hr>");
+    </script>
+</body>
+
+</html>
