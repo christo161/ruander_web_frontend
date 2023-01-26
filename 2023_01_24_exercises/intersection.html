@@ -24,20 +24,18 @@
         let intersection = [];
 
         for (let i = 0; i < array1.length; ++i) {
-            let includes_both = false;
             for (let j = 0; j < array2.length; ++j) {
                 if (array1[i] == array2[j]) {
-                    includes_both = true;
+                    let includes = false;
+                    for (let j = 0; j < array2.length && !includes; ++j) {
+                        if (array1[i] == intersection[j]) {
+                            includes = true;
+                        }
+                    }
+                    if (!includes) {
+                        intersection.push(array1[i]);
+                    }
                 }
-            }
-            let includes = false;
-            for (let j = 0; j < array2.length; ++j) {
-                if (array1[i] == intersection[j]) {
-                    includes = true;
-                }
-            }
-            if (includes_both && !includes) {
-                intersection.push(array1[i]);
             }
         }
 

@@ -16,22 +16,26 @@
     <div>Array2:</div>
     <ul id="array2"></ul>
     <div>difference:</div>
-    <ul id="difference"></ul>
+    <div>array1-array2:</div>
+    <ul id="a1_minus_a2"></ul>
+    <div>array1-array2:</div>
+    <ul id="a2_minus_a1"></ul>
     <script>
         let array1 = [1, 2, 3, 3, 4, 4, 5];
         let array2 = [3, 3, 4, 5, 5, 6, 7, 8, 9];
 
-        let difference = [];
+        let a1_minus_a2 = [];
 
-        difference.push(...array1.filter(item => !array2.includes(item)));
+        a1_minus_a2.push(...array1.filter(item => !array2.includes(item)));
 
-        difference.push(...array2.filter(item => !array1.includes(item)));
+        let a2_minus_a1 = [];
 
-        difference = [...new Set(difference)];
+        a2_minus_a1.push(...array2.filter(item => !array1.includes(item)));
 
         array1.map(item => document.querySelector("#array1").appendChild(document.createElement("li")).innerHTML = item);
         array2.map(item => document.querySelector("#array2").appendChild(document.createElement("li")).innerHTML = item);
-        difference.map(item => document.querySelector("#difference").appendChild(document.createElement("li")).innerHTML = item);
+        a1_minus_a2.map(item => document.querySelector("#a1_minus_a2").appendChild(document.createElement("li")).innerHTML = item);
+        a2_minus_a1.map(item => document.querySelector("#a2_minus_a1").appendChild(document.createElement("li")).innerHTML = item);
     </script>
 </body>
 

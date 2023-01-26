@@ -16,52 +16,58 @@
     <div>Array2:</div>
     <ul id="array2"></ul>
     <div>difference:</div>
-    <ul id="difference"></ul>
+    <div>array1-array2:</div>
+    <ul id="a1_minus_a2"></ul>
+    <div>array1-array2:</div>
+    <ul id="a2_minus_a1"></ul>
     <script>
-        let array1 = [1, 2, 3, 3, 4, 4, 5];
+        let array1 = [1, 2, 2, 3, 3, 4, 4, 5];
         let array2 = [3, 3, 4, 5, 5, 6, 7, 8, 9];
 
-        let difference = [];
+        let a1_minus_a2 = [];
 
         for (let i = 0; i < array1.length; ++i) {
             let includes_both = false;
-            for (let j = 0; j < array2.length; ++j) {
+            for (let j = 0; j < array2.length && !includes_both; ++j) {
                 if (array1[i] == array2[j]) {
                     includes_both = true;
                 }
             }
-            let includes = false;
-            for (let j = 0; j < array2.length; ++j) {
-                if (array1[i] == difference[j]) {
-                    includes = true;
+            let a1_minus_a2_includes = false;
+            for (let j = 0; j < array2.length && !a1_minus_a2_includes; ++j) {
+                if (array1[i] == a1_minus_a2[j]) {
+                    a1_minus_a2_includes = true;
                 }
             }
-            if (!includes_both && !includes) {
-                difference.push(array1[i]);
+            if (!includes_both && !a1_minus_a2_includes) {
+                a1_minus_a2.push(array1[i]);
             }
         }
 
+        let a2_minus_a1 = [];
+
         for (let i = 0; i < array2.length; ++i) {
             let includes_both = false;
-            for (let j = 0; j < array2.length; ++j) {
+            for (let j = 0; j < array2.length && !includes_both; ++j) {
                 if (array2[i] == array1[j]) {
                     includes_both = true;
                 }
             }
-            let includes = false;
-            for (let j = 0; j < array1.length; ++j) {
-                if (array2[i] == difference[j]) {
-                    includes = true;
+            let a2_minus_a1_includes = false;
+            for (let j = 0; j < array1.length && !a2_minus_a1_includes; ++j) {
+                if (array2[i] == a2_minus_a1[j]) {
+                    a2_minus_a1_includes = true;
                 }
             }
-            if (!includes_both && !includes) {
-                difference.push(array2[i]);
+            if (!includes_both && !a2_minus_a1_includes) {
+                a2_minus_a1.push(array2[i]);
             }
         }
 
         array1.map(item => document.querySelector("#array1").appendChild(document.createElement("li")).innerHTML = item);
         array2.map(item => document.querySelector("#array2").appendChild(document.createElement("li")).innerHTML = item);
-        difference.map(item => document.querySelector("#difference").appendChild(document.createElement("li")).innerHTML = item);
+        a1_minus_a2.map(item => document.querySelector("#a1_minus_a2").appendChild(document.createElement("li")).innerHTML = item);
+        a2_minus_a1.map(item => document.querySelector("#a2_minus_a1").appendChild(document.createElement("li")).innerHTML = item);
     </script>
 </body>
 

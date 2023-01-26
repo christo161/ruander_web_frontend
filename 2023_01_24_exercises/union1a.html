@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kovács Ádám, halmazművelet, különbség</title>
+    <title>Kovács Ádám, halmazművelet, unió</title>
 </head>
 
 <body>
@@ -15,35 +15,41 @@
     <ul id="array1"></ul>
     <div>Array2:</div>
     <ul id="array2"></ul>
-    <div>difference:</div>
-    <div>array1-array2:</div>
-    <ul id="a1_minus_a2"></ul>
-    <div>array1-array2:</div>
-    <ul id="a2_minus_a1"></ul>
+    <div>Union:</div>
+    <ul id="union"></ul>
     <script>
-        let array1 = [1, 2, 3, 3, 4, 4, 5];
-        let array2 = [3, 3, 4, 5, 5, 6, 7, 8, 9];
+        function includes(p_array, element) {
+            let bool_includes = false;
+            for (let i = 0; i < p_array.length && !bool_includes; ++i) {
+                if (p_array[i] == element) {
+                    bool_includes = true;
+                }
+            }
+            return bool_includes;
+        }
 
-        let a1_minus_a2 = [];
+        let array1 = [1, 2, 3, 4, 4, 5];
+        let array2 = [5, 5, 6, 7, 8, 9];
+
+        let union = [];
 
         for (let i = 0; i < array1.length; ++i) {
-            if (!array2.includes(array1[i]) && !a1_minus_a2.includes(array1[i])) {
-                a1_minus_a2.push(array1[i]);
+            let bool_includes = includes(union, array1[i]);
+            if (!bool_includes) {
+                union.push(array1[i]);
             }
         }
 
-        let a2_minus_a1 = [];
-
         for (let i = 0; i < array2.length; ++i) {
-            if (!array1.includes(array2[i]) && !a2_minus_a1.includes(array2[i])) {
-                a2_minus_a1.push(array2[i]);
+            let bool_includes = includes(union, array2[i]);
+            if (!bool_includes) {
+                union.push(array2[i]);
             }
         }
 
         array1.map(item => document.querySelector("#array1").appendChild(document.createElement("li")).innerHTML = item);
         array2.map(item => document.querySelector("#array2").appendChild(document.createElement("li")).innerHTML = item);
-        a1_minus_a2.map(item => document.querySelector("#a1_minus_a2").appendChild(document.createElement("li")).innerHTML = item);
-        a2_minus_a1.map(item => document.querySelector("#a2_minus_a1").appendChild(document.createElement("li")).innerHTML = item);
+        union.map(item => document.querySelector("#union").appendChild(document.createElement("li")).innerHTML = item);
     </script>
 </body>
 

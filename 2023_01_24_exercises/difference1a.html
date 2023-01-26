@@ -21,13 +21,25 @@
     <div>array1-array2:</div>
     <ul id="a2_minus_a1"></ul>
     <script>
-        let array1 = [1, 2, 3, 3, 4, 4, 5];
+        function includes(p_array, element) {
+            let bool_includes = false;
+            for (let i = 0; i < p_array.length && !bool_includes; ++i) {
+                if (p_array[i] == element) {
+                    bool_includes = true;
+                }
+            }
+            return bool_includes;
+        }
+
+        let array1 = [1, 2, 2, 3, 3, 4, 4, 5];
         let array2 = [3, 3, 4, 5, 5, 6, 7, 8, 9];
 
         let a1_minus_a2 = [];
 
         for (let i = 0; i < array1.length; ++i) {
-            if (!array2.includes(array1[i]) && !a1_minus_a2.includes(array1[i])) {
+            let includes_both = includes(array2, array1[i])
+            let a1_minus_a2_includes = includes(a1_minus_a2, array1[i]);
+            if (!includes_both && !a1_minus_a2_includes) {
                 a1_minus_a2.push(array1[i]);
             }
         }
@@ -35,7 +47,9 @@
         let a2_minus_a1 = [];
 
         for (let i = 0; i < array2.length; ++i) {
-            if (!array1.includes(array2[i]) && !a2_minus_a1.includes(array2[i])) {
+            let includes_both = includes(array1, array2[i])
+            let a2_minus_a1_includes = includes(a2_minus_a1, array2[i]);
+            if (!includes_both && !a2_minus_a1_includes) {
                 a2_minus_a1.push(array2[i]);
             }
         }
