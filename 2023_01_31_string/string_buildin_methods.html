@@ -1,0 +1,301 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, beépített stringműveletek</title>
+</head>
+
+<body>
+    <div>String example: "I love programming"</div>
+    <hr>
+    <div>charAt returns in the case of example.charAt(0): the character according to parameter index from the value of example</div>
+    <div>returns empty string if the case of outofbounds</div>
+    <div>alternatives: example[0], but this will return undefined in the case of outofbounds</div>
+    <div>charAt examples:</div>
+    <ul id="charat"></ul>
+    <div>concat returns in the case of example.concat("argument"): example + argument</div>
+    <div>alternatives: + operator</div>
+    <div>concat examples:</div>
+    <ul id="concat"></ul>
+    <div>includes return value: true/false in the case of example.includes("argument") if the value of example includes "argument"</div>
+    <div>includes examples:</div>
+    <ul id="includes"></ul>
+    <div>startWith return value: true/false in the case of example.startWith("argument") if the value of example starts with "argument"</div>
+    <div>startWith examples:</div>
+    <ul id="start_with"></ul>
+    <div>indexOf returns in the case of example.indexOf("argument"): the index of first character of "argument" in the value of example, or -1 if the value of example doesn't include "argument"</div>
+    <div>indexOf examples:</div>
+    <ul id="indexof"></ul>
+    <div>length return value: "length of the string in UTF-16 code units". Some special characters may be counted more than 1.</div>
+    <div>length examples:</div>
+    <ul id="length"></ul>
+    <div>replace returns in example.replace("p1","p2"): replace first occurence of p1 with p2 in the value of example</div>
+    <div>replace examples:</div>
+    <ul id="replace"></ul>
+    <div>replaceAll returns in example.replaceAll("p1","p2"): replace all occurence of p1 with p2 in the value of example</div>
+    <div>replaceAll examples:</div>
+    <ul id="replaceall"></ul>
+    <div>repeat examples:</div>
+    <div>repeat returns in example.repeat(3): concat the value of example with itself 3 times</div>
+    <ul id="repeat"></ul>
+    <div>substr parameter1: the index of the character to cut from (inclusive)</div>
+    <div>substr parameter2: number of characters to cut</div>
+    <div>Notice: substr is deprecated. Try to avoid using it. <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr">source</a></div>
+    <div>substr examples:</div>
+    <ul id="substr"></ul>
+    <div>substr parameter1: the index of the character to cut from (inclusive)</div>
+    <div>substr parameter2: the index of the character to cut to (inclusive)</div>
+    <div>substring examples:</div>
+    <ul id="substring"></ul>
+    <div>params: same as substring</div>
+    <div>slice examples:</div>
+    <ul id="slice"></ul>
+    <div>return value: an array from the string divided by the delimiter character given in the argument</div>
+    <div>notice: the elements of the array are always strings, sometimes empty strings</div>
+    <div>split examples:</div>
+    <ul id="split"></ul>
+    <div>return value: a string from an array, string parts (from the array elements) are divided by the delimiter character given in the argument</div>
+    <div>notice: this is not a string method, this is an array method</div>
+    <div>join examples:</div>
+    <ul id="join"></ul>
+    <div>return value: the same string but with ALL CAPS</div>
+    <div>toUpperCase examples:</div>
+    <ul id="touppercase"></ul>
+    <div>return value: the same string but with all lower case</div>
+    <div>toLowerCase examples:</div>
+    <ul id="tolowercase"></ul>
+    <div>trim return value: the same string, but removes white space characters (' ', '\t', '\n') from the start and end</div>
+    <div>notice: if you want white spaces to appear properly inside a HTML tag, you need to use style='white-space:pre' attribute or a css class with white-space:pre property</div>
+    <div>notice: you can also use &lt;pre&gt;&lt;/pre&gt; tags, but that has default browser values (for example display: block) <a target="_blank" href="https://www.w3schools.com/cssref/css_default_values.php">see this link for details</a></div>
+    <div>trim examples:</div>
+    <ul id="trim"></ul>
+    <div>trimStart examples:</div>
+    <ul id="trimstart"></ul>
+    <div>trimEnd examples:</div>
+    <ul id="trimend"></ul>
+
+    <script>
+        //---function: add <li>content<li> to <ul></ul> (or <ol></ol>)
+        //param1: id of list (string)
+        //do not include # character to the id when you call the function
+        //param2: content of <li></li> (string)
+        function add_to_list(id, content) {
+            document.querySelector("#" + id).appendChild(document.createElement("li")).innerHTML = content;
+        }
+
+        //---string example!
+        let str_example = "I love programming";
+
+        //---charat examples
+
+        //first
+        let str_firstchar = str_example.charAt(0);
+        add_to_list("charat", "firstchar: " + str_firstchar);
+
+        //last
+        let str_lastchar = str_example.charAt(str_example.length - 1);
+        add_to_list("charat", "lastchar: " + str_lastchar);
+
+        //middle
+        let str_middlechar = str_example.charAt(Math.round(str_example.length / 2));
+        add_to_list("charat", "middlechar: " + str_middlechar);
+
+        //outofbounds
+        let outofbounds = str_example.charAt(1000);
+        add_to_list("charat", "outofbounds: " + outofbounds + " (empty string)");
+
+        //---concat examples
+
+        //to end (push)
+        let concat_end = str_example.concat("<span class='blue'>, because it's so easy</span>");
+        add_to_list("concat", "to the end: " + concat_end);
+
+        //to beginning (unshift)
+        //just switch the strings you want to concat
+        let concat_beginning = "<span class='blue'>I said that</span> ".concat(str_example);
+        add_to_list("concat", "to the beginning: " + concat_beginning);
+
+        //--includes examples
+
+        //example1
+        let includes_example1 = "programming";
+        add_to_list("includes",
+        "<span class='red'>" + str_example + "</span> includes <span class='blue'>" + includes_example1 + "</span>? "
+        + str_example.includes(includes_example1));
+
+        //example2
+        let includes_example2 = "ov";
+        add_to_list("includes",
+        "<span class='red'>" + str_example + "</span> includes <span class='blue'>" + includes_example2 + "</span>? "
+        + str_example.includes(includes_example2));
+
+        //--startWith examples
+
+        //example1
+        let start_with_example1 = "I love";
+        add_to_list("start_with",
+        "<span class='red'>" + str_example + "</span> start with <span class='blue'>" + start_with_example1 + "</span>? "
+        + str_example.startsWith(start_with_example1));
+
+        //example2
+        let start_with_example2 = "programming";
+        add_to_list("start_with",
+        "<span class='red'>" + str_example + "</span> start with <span class='blue'>" + start_with_example2 + "</span>? "
+        + str_example.startsWith(start_with_example2));
+
+        //--indexOf examples
+
+        //example1
+        let indexof_example1 = "programming";
+        add_to_list("indexof",
+        "Index of <span class='blue'>" + indexof_example1 + "</span>'s first character in <span class='red'>" + str_example + "</span>: "
+        + str_example.indexOf(indexof_example1));
+
+        //example2
+        let indexof_example2 = "something else";
+        add_to_list("indexof",
+        "Index of <span class='blue'>" + indexof_example2 + "</span>'s first character in <span class='red'>" + str_example + "</span>: "
+        + str_example.indexOf(indexof_example2));
+
+        //--length examples
+
+        //example1
+        let length_example1 = str_example;
+        add_to_list("length",
+        "Length of <span class='blue'>" + length_example1 + "</span>: " + length_example1.length);
+
+        //example2
+        let length_example2 = "😄";
+        add_to_list("length",
+        "Length of <span class='blue'>" + length_example2 + "</span>: " + length_example2.length);
+
+        //--replace examples
+
+        //example1
+        let replacefrom_example1 = "programming";
+        let replaceto_example1 = "geocaching";
+
+        add_to_list("replace",
+        "Replace <span class='blue'>" + replacefrom_example1 + "</span> in <span class='red'>" + str_example + "</span> to <span class='blue'>" + replaceto_example1 + "</span>: "
+        + str_example.replace(replacefrom_example1, replaceto_example1));
+
+        //example2
+        let replacefrom_example2 = "r";
+        let replaceto_example2 = "R";
+
+        add_to_list("replace",
+        "Replace <span class='blue'>" + replacefrom_example2 + "</span> in <span class='red'>" + str_example + "</span> to <span class='blue'>" + replaceto_example2 + "</span>: "
+        + str_example.replace(replacefrom_example2, replaceto_example2));
+
+        //--replaceAll examples
+
+        let replaceallfrom_example = "r";
+        let replaceallto_example = "R";
+
+        add_to_list("replaceall",
+        "Replace <span class='blue'>" + replaceallfrom_example + "</span> in <span class='red'>" + str_example + "</span> to <span class='blue'>" + replaceallto_example + "</span>: "
+        + str_example.replaceAll(replaceallfrom_example, replaceto_example2));
+
+        //--repeat examples
+
+        //example1
+        add_to_list("repeat",
+        "Repeat 3 times <span class='blue'>" + str_example + "</span>: <span class='red'>" + str_example.repeat(3) + "</span>.");
+
+        //example2
+        add_to_list("repeat",
+        "Repeat 3 times <span class='blue'>" + str_example + " </span>: <span class='red'>" + (str_example + ' ').repeat(3) + "</span>.");
+
+        //example3
+        add_to_list("repeat",
+        "Repeat 3 times <span class='blue'>" + str_example + " </span>: <span id='repeat3' class='red'>" + (str_example + ' ').repeat(3) + "</span>. And cut the last space.");
+        document.querySelector("#repeat3").innerHTML = document.querySelector("#repeat3").innerHTML.slice(0, -1);
+
+        //--substr examples
+
+        add_to_list("substr",
+        "<span class='blue'> '"+ str_example +"'.substr(4,6)</span>: <span class='red'>" + str_example.substr(4,6) + "</span>");
+
+        //--substring examples
+
+        add_to_list("substring",
+        "<span class='blue'> '"+ str_example +"'.substring(4,6)</span>: <span class='red'>" + str_example.substring(4,6) + "</span>");
+
+        //--slice examples
+
+        add_to_list("slice",
+        "<span class='blue'> '"+ str_example +"'.slice(4,6)</span>: <span class='red'>" + str_example.slice(4,6) + "</span>");
+        
+        //--split examples
+
+        //example1:
+        add_to_list("split",
+        "<span class='blue'> '"+ str_example +"'.split(' ')</span>: <span class='red'>[" + str_example.split(" ").toString() + "]</span>");
+
+        //example2:
+        add_to_list("split",
+        "<span class='blue'> '"+ str_example +"'.split('')</span>: <span class='red'>[" + str_example.split("").toString() + "]</span>");
+
+        //example3:
+        add_to_list("split",
+        "<span class='blue'> '2007.05.01'.split('')</span>: <span class='red'>[" + '2007.05.01'.split(".").toString() + "]</span>");
+
+        //example4:
+        add_to_list("split",
+        "<span class='blue'> '2007.05.01.'.split('')</span>: <span class='red'>[" + '2007.05.01.'.split(".").toString() + "]</span>");
+
+        //--join examples
+
+        //example1:
+        add_to_list("join",
+        "<span class='blue'> [1,2,3,4,5].join(' ')</span>: <span class='red'>" + [1,2,3,4,5].join(" ") + "</span>");
+
+        //example2:
+        add_to_list("join",
+        "<span class='blue'> [1,2,3,4,5].join('')</span>: <span class='red'>" + [1,2,3,4,5].join("") + "</span>");
+
+        //example3:
+        add_to_list("join",
+        "<span class='blue'> [1,2,3,4,5].join('-')</span>: <span class='red'>" + [1,2,3,4,5].join("-") + "</span>");
+
+        //--toUpperCase examples
+
+        add_to_list("touppercase",
+        "<span class='blue'> '"+ str_example +"'.toUpperCase()</span>: <span class='red'>" + str_example.toUpperCase() + "</span>");
+
+        //--toLowerCase examples
+
+        add_to_list("tolowercase",
+        "<span class='blue'> '"+ str_example +"'.toLowerCase()</span>: <span class='red'>" + str_example.toLowerCase() + "</span>");
+
+        //--trim examples
+
+        add_to_list("trim",
+        "<span style='white-space:pre' class='blue'> '\tI love programming\t'.trim()</span>: <span style='white-space:pre' class='red'>" + '\tI love programming\t'.trim()+ "</span>");
+
+        //--trimStart examples
+
+        add_to_list("trimstart",
+        "<span style='white-space:pre' class='blue'> '\tI love programming\t'.trimStart()</span>: <span style='white-space:pre' class='red'>" + '\tI love programming\t'.trimStart() + "</span>.");
+
+        //--trimEnd examples
+
+        add_to_list("trimend",
+        "<span style='white-space:pre' class='blue'> '\tI love programming\t'.trimEnd()</span>: <span style='white-space:pre' class='red'>" + '\tI love programming\t'.trimEnd() + "</span>");
+    </script>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color:blue;
+        }
+    </style>
+</body>
+
+</html>
