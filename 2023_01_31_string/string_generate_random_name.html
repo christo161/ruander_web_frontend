@@ -1,0 +1,102 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, random névgenerátor</title>
+</head>
+
+<body>
+    <h1>Names from random strings</h1>
+    <hr>
+    <div>Random names:</div>
+    <ul id="random_names"></ul>
+    <button id="btn_generate">Genereate +1</button>
+
+
+
+    <script>
+        //generate random number
+        function generate_random_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        //generate random strings from these
+        let vowels = "aeiou";
+        let consonants = "bcdfghjklmnpqrstvw"
+
+        //generate random string
+        //vowel after consonant
+        //consonant after vowel
+        function generate_random_string(min, max) {
+            let nextchar_isvowel = !!(generate_random_number(0,1));
+
+            random_string = "";
+            string_size = generate_random_number(min, max);
+            for (let i = 0; i < string_size; ++i) {
+                if (nextchar_isvowel) {
+                    random_string += vowels.charAt(generate_random_number(0,vowels.length-1));
+                } else {
+                    random_string += consonants.charAt(generate_random_number(0,consonants.length-1));
+                }
+                nextchar_isvowel = !nextchar_isvowel;
+            }
+            return random_string;
+        }
+
+        //generate surname+lastname
+        function generate_random_name() {
+            let surname = generate_random_string(5,10);
+            let lastname = generate_random_string(5,10);
+
+            return surname.charAt(0).toUpperCase() + surname.slice(1) + " " +
+            lastname.charAt(0).toUpperCase() + lastname.slice(1);
+        }
+
+
+        //---function: add <li>content<li> to <ul></ul> (or <ol></ol>)
+        //param1: id of list (string)
+        //do not include # character to the id when you call the function
+        //param2: content of <li></li> (string)
+        function add_to_list(id, content) {
+            document.querySelector("#" + id).appendChild(document.createElement("li")).innerHTML = content;
+        }
+
+        //click to button
+        function print_result(event) {
+            event.preventDefault();
+
+            add_to_list("random_names", generate_random_name());
+        }
+
+        document.querySelector("#btn_generate").addEventListener("click", print_result);
+    </script>
+    <style>
+        button {
+            background-color: skyblue;
+            color: black;
+            border: 0px;
+            border: 2px solid silver;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        button:hover {
+            background-color: chartreuse;
+        }
+
+        button:active {
+            background-color: lightcoral;
+        }
+
+        ul#random_names li:nth-child(even) {
+            color: blue;
+        }
+    </style>
+</body>
+
+</html>
