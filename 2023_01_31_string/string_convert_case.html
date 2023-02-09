@@ -1,0 +1,232 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, szövegkonvertálás</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Szövegkonvertálás</legend>
+        <form action="">
+            <label for="text_example">Példaszöveg:</label>
+            <br>
+            <input type="text" name="text_example" id="text_example" value="some example case">
+            <br>
+            <fieldset>
+                <legend>
+                    Elválasztó karakter:
+                </legend>
+                <input type="radio" name="delimiter" id="space" checked>
+                <label for="space">szóköz ( )</label>
+                <input type="radio" name="delimiter" id="dot">
+                <label for="dot">pont (.)</label>
+                <input type="radio" name="delimiter" id="comma">
+                <label for="comma">vessző (,)</label>
+                <input type="radio" name="delimiter" id="dash">
+                <label for="dash">kötőjel (-)</label>
+                <input type="radio" name="delimiter" id="underscore">
+                <label for="underscore">alsóvonal (_)</label>
+                <input type="radio" name="delimiter" id="colon">
+                <label for="colon">kettőspont (:)</label>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    A konvertálás típusa:
+                </legend>
+                <input type="radio" name="convert_case" id="all_lowercase" checked>
+                <label for="all_lowercase">all lowercase</label>
+                <br>
+                <input type="radio" name="convert_case" id="all_caps">
+                <label for="all_caps">ALL CAPS</label>
+                <br>
+                <input type="radio" name="convert_case" id="toggle_case">
+                <label for="toggle_case">toggle case</label>
+                <br>
+                <input type="radio" name="convert_case" id="capitalize">
+                <label for="capitalize">Capitalized Case</label>
+                <br>
+                <input type="radio" name="convert_case" id="sentence_case">
+                <label for="sentence_case">Sentence case</label>
+                <br>
+                <input type="radio" name="convert_case" id="camel_case">
+                <label for="camel_case">camelCase</label>
+                <br>
+                <input type="radio" name="convert_case" id="pascal_case">
+                <label for="pascal_case">PascalCase</label>
+                <br>
+                <input type="radio" name="convert_case" id="snake_case">
+                <label for="snake_case">snake_case</label>
+                <br>
+                <button id="btn_convert">Konvertálás</button>
+            </fieldset>
+        </form>
+        <label for="result">Eredmény:</label><br>
+        <output id="result"></output>
+    </fieldset>
+    <script>
+        //these methods needed for toggle case (begin)
+        String.prototype.isUpperCase = function () {
+
+            if (this == this.toUpperCase()) {
+                return true;
+            }
+            else return false;
+        }
+
+        String.prototype.isLowerCase = function () {
+
+            if (this == this.toLowerCase()) {
+                return true;
+            }
+            else return false;
+        }
+        //these methods needed for toggle case (end)
+
+        //delimiter id -> delimiter character
+        function get_delimiter() {
+            let delimiter_id = document.querySelector("input[type='radio'][name='delimiter']:checked").id;
+
+            switch (delimiter_id) {
+                case "space":
+                    return " ";
+                    break;
+                case "dot":
+                    return ".";
+                    break;
+                case "comma":
+                    return ",";
+                    break;
+                case "dash":
+                    return "-";
+                    break;
+                case "underscore":
+                    return "_";
+                    break;
+                case "colon":
+                    return ":";
+                    break;
+            }
+        }
+
+        //get convert type id
+        function get_convert_type() {
+            return document.querySelector("input[type='radio'][name='convert_case']:checked").id;
+        }
+
+        //convert text
+        function convert_case(p_convertfrom) {
+            let delimiter = get_delimiter();
+            let convert_type = get_convert_type();
+
+            let splitby_delimiter = p_convertfrom.split(delimiter);
+
+            let convert_result = "";
+
+            switch (convert_type) {
+                case "all_lowercase":
+                    convert_result = splitby_delimiter.join(" ").toLowerCase();
+                    break;
+                case "all_caps":
+                    convert_result = splitby_delimiter.join(" ").toUpperCase();
+                    break;
+                case "toggle_case":
+                    convert_result = p_convertfrom.split("").map( element => element.isUpperCase() ? element.toLowerCase() : element.toUpperCase() ).join("");
+                    break;
+                case "capitalize":
+                    convert_result = (splitby_delimiter).map(element => element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()).join(" ");
+                    break;
+                case "sentence_case":
+                    let string_joined_by_space = splitby_delimiter.join(" ");
+                    convert_result = string_joined_by_space.charAt(0).toUpperCase() + string_joined_by_space.substring(1).toLowerCase();
+                    break;
+                case "camel_case":
+                    //if we use {} in arrow function, we need "return" keyword
+                    convert_result = (splitby_delimiter).map((element, index) => { return index == 0 ? element.toLowerCase() : element.charAt(0).toUpperCase() + element.slice(1).toLowerCase() }).join("");
+                    break;
+                case "pascal_case":
+                    convert_result = (splitby_delimiter).map(element => element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()).join("");
+                    break;
+                case "snake_case":
+                    convert_result = (splitby_delimiter).map(element => element.toLowerCase()).join("_");
+                    break;
+            }
+
+            return convert_result;
+        }
+
+        //print into <output id="result"></output>
+        function print_result(event) {
+            event.preventDefault();
+
+            let input_value = document.querySelector("#text_example").value;
+            let output_value = convert_case(input_value);
+            document.querySelector("#result").value = output_value;
+        }
+        document.querySelector("#btn_convert").addEventListener("click", print_result);
+    </script>
+    <style>
+        legend {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: skyblue;
+            color: black;
+            border: 0px;
+            border: 2px solid silver;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        button:hover {
+            background-color: chartreuse;
+        }
+
+        button:active {
+            background-color: lightcoral;
+        }
+
+
+        input[type=text] {
+            width: 100%;
+            border: 0px;
+            border-bottom: 2px solid skyblue;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        input[type=text]:hover {
+            border: 0px;
+            border-bottom: 2px solid red;
+        }
+
+        input[type=text]:focus {
+            outline: 0px;
+        }
+
+        input[type=radio] {
+            margin-bottom: 10px;
+        }
+
+        output {
+            display: block;
+            border-bottom: 2px solid skyblue;
+            min-height: 1em;
+            font-size: 16px;
+        }
+
+        output:hover {
+            border-bottom: 2px solid red;
+        }
+    </style>
+</body>
+
+</html>
