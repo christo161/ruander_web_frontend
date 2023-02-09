@@ -1,0 +1,111 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, beépített stringműveletek</title>
+    <script src="euListaObjektum.js"></script>
+</head>
+
+<body>
+    <div>EU tagállamok példa</div>
+    <hr>
+    <div>Hány Eu tagállam van:</div>
+    <ul id="tagallamok_szama"></ul>
+    <div>Hány csatlakozott 2007-ben:</div>
+    <ul id="csatlakozas_2007"></ul>
+    <div>Csatlakozott-e Magyarország:</div>
+    <ul id="magyarorszag"></ul>
+    <div>Volt-e májusban csatlakozas:</div>
+    <ul id="majus_csatlakozas"></ul>
+    <div>Utoljára csatlakozott:</div>
+    <ul id="utoljara_csatlakozott"></ul>
+    <div>Évenkénti csatlakozás:</div>
+    <ul id="evenkenti_csatlakozas"></ul>
+    <script>
+        //---function: add <li>content<li> to <ul></ul> (or <ol></ol>)
+        //param1: id of list (string)
+        //do not include # character to the id when you call the function
+        //param2: content of <li></li> (string)
+        function add_to_list(id, content) {
+            document.querySelector("#" + id).appendChild(document.createElement("li")).innerHTML = content;
+        }
+
+        //A paraméterben megadott évben csatlakozott országok számát adja vissza
+        function csatlakozas_eve(p_evszam) {
+        let db = 0;
+        for (let i = 0; i < EuropaiUnio.length;++i) {
+            //if (EuropaiUnio[i].csatlakozas.substr(0,4) == "2007") {
+            //if (EuropaiUnio[i].csatlakozas.includes("2007")) {
+            //if (EuropaiUnio[i].csatlakozas.startsWith("2007")) {
+            if (EuropaiUnio[i].csatlakozas.slice(0,4) == p_evszam) {
+                ++db;
+            }
+        }
+        return db;
+    }
+
+        //Adott ország csatlakozott-e, true/false értéket ad vissza
+        function csatlakozott_e(p_orszag) {
+            for (let i = 0; i < EuropaiUnio.length;++i) {
+                if (EuropaiUnio[i].orszag == p_orszag) {
+                    return true;
+                }
+            }
+            return false;
+        }   
+        
+
+        //Volt-e adott hónapban csatlakozás?
+        function adott_honapban_volte_csatlakozas(p_honap) {
+            for (let i = 0; i < EuropaiUnio.length;++i) {
+                if (EuropaiUnio[i].csatlakozas.split(".")[1] == p_honap) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        //példák
+        //Hány Eu tagállam van?
+        add_to_list("tagallamok_szama", EuropaiUnio.length);
+
+        //2007-ben csatlakozott államok száma
+        add_to_list("csatlakozas_2007", csatlakozas_eve(2007));
+
+        //Magyarország csatlakozott-e?
+        add_to_list("magyarorszag", csatlakozott_e("Magyarország"));
+
+        //Májusban volt-e csatlakozás
+        add_to_list("majus_csatlakozas", adott_honapban_volte_csatlakozas("05"));
+
+        //Melyik ország csatlakozott utoljára
+        let utoljara_csatlakozott = EuropaiUnio[0];
+        for (let i = 1; i < EuropaiUnio.length;++i) {
+            if (EuropaiUnio[i].csatlakozas > utoljara_csatlakozott.csatlakozas) {
+                utoljara_csatlakozott = EuropaiUnio[i];
+            }
+        }
+        add_to_list("utoljara_csatlakozott", utoljara_csatlakozott.orszag);
+
+        let evenkenti_csatlakozas = new Map();
+        for (let i = 0; i < EuropaiUnio.length;++i) {
+            if (!evenkenti_csatlakozas.has(EuropaiUnio[i].csatlakozas)) {
+                evenkenti_csatlakozas.set(EuropaiUnio[i].csatlakozas , 1);
+            } else {
+                evenkenti_csatlakozas.set(EuropaiUnio[i].csatlakozas , evenkenti_csatlakozas.get(EuropaiUnio[i].csatlakozas)+1);
+            }
+        }
+
+        evenkenti_csatlakozas = new Map([...evenkenti_csatlakozas].sort())
+        for (const [key, value] of evenkenti_csatlakozas.entries()) {
+            add_to_list("evenkenti_csatlakozas", key + " " + value);
+        }
+    </script>
+</body>
+
+</html>
