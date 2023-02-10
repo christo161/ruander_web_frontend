@@ -1,0 +1,100 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, fifa, objektum</title>
+    <script src="fifaForras.js"></script>
+</head>
+<body>
+    <table id="csapatadat">
+        <thead>
+            <th>
+                Csapat neve
+            </th>
+            <th>
+                Csapat helyezése
+            </th>
+            <th>
+                Csapat helyének változása
+            </th>
+            <th>
+                Csapat Pontszama 
+            </th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div>Adja meg aktuálisan hány csapat szerepel a ranglistán</div>
+    <ul id="hany_csapat"></ul>
+    <div>Írja ki mennyi a résztvevő csapatok átlagpontszáma</div>
+    <ul id="atlagpontszam"></ul>
+    <div>Listázza ki azokat a csapatokat, akik az átlagnál több pontot értek el!</div>
+    <ul id="atlagfelettiek"></ul>
+    <script>
+        //convert strings into array of object
+        let objektum_tomb = [];
+        for (let i = 0; i < csapatAdat.length; ++i) {
+            let splitelt_string = csapatAdat[i].split(";");
+            objektum_tomb.push({
+                nev: splitelt_string[0], 
+                helyezes : splitelt_string[1], 
+                valtozas : splitelt_string[2], 
+                pont : splitelt_string[3]});
+        }
+
+        //create a table
+        let tbody = document.querySelector("#csapatadat tbody");
+        for (let i = 0; i < objektum_tomb.length; ++i) {
+            let actual_tr = document.createElement("tr");
+            tbody.appendChild(actual_tr);
+            let actual_td1 = document.createElement("td");
+            actual_td1.innerHTML = objektum_tomb[i].nev;
+            let actual_td2 = document.createElement("td");
+            actual_td2.innerHTML = objektum_tomb[i].helyezes;
+            let actual_td3 = document.createElement("td");
+            actual_td3.innerHTML = objektum_tomb[i].valtozas;
+            let actual_td4 = document.createElement("td");
+            actual_td4.innerHTML = objektum_tomb[i].pont;
+            actual_tr.appendChild(actual_td1);
+            actual_tr.appendChild(actual_td2);
+            actual_tr.appendChild(actual_td3);
+            actual_tr.appendChild(actual_td4);
+        }
+
+        //1 Adja meg aktuálisan hány csapat szerepel a ranglistán
+
+        document.querySelector("#hany_csapat").appendChild(document.createElement("li")).innerHTML = objektum_tomb.length;
+
+        //2 Írja ki mennyi a résztvevő csapatok átlagpontszáma
+
+        let total = objektum_tomb.reduce(function ( total, current ) { return total + parseInt(current.pont)}, 0);
+        let avg = total/objektum_tomb.length;
+        document.querySelector("#atlagpontszam").appendChild(document.createElement("li")).innerHTML = avg;
+
+        //3 Listázza ki azokat a csapatokat, akik az átlagnál több pontot értek el!
+        let above_avg = objektum_tomb.filter(function(element) { return (element.pont > avg);});
+        let above_avg_queryselector = document.querySelector("#atlagfelettiek");
+        above_avg.map( element =>
+            above_avg_queryselector.appendChild(document.createElement("li")).innerHTML = element.nev + ": " + element.pont
+        );
+
+    </script>
+    <style>
+        table, th, td {
+            border: 2px solid skyblue;
+            margin-bottom: 15px;
+        }
+
+        table tr td:nth-child(2), 
+        table tr td:nth-child(3),
+        table tr td:nth-child(4) {
+            text-align: right;
+        }
+    </style>
+</body>
+</html>
