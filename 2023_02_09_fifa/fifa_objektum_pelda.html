@@ -35,6 +35,15 @@
     <ul id="atlagpontszam"></ul>
     <div>Listázza ki azokat a csapatokat, akik az átlagnál több pontot értek el!</div>
     <ul id="atlagfelettiek"></ul>
+    <div>Írja ki a legtöbbet javító csapat adatait (helyezés, csapatneve, pontszám)</div>
+    <ul id="legtobbetjavito"></ul>
+    <div>Adott ország szerepelt-e a ranglistán (pl. Hollandia)</div>
+    <ul id="szerepelte"></ul>
+    <div>Azon változások kiválogatása, ami több mint 2</div>
+    <ul id="tobbmint_ketto"></ul>
+    <div>Melyik változás hányszor szerepel a táblázatban (csak azokat, amik legalább kétszer szerepelnek)</div>
+    <ul id="valtozas_legalabb_ketszer"></ul>
+    
     <script>
         //convert strings into array of object
         let objektum_tomb = [];
@@ -83,6 +92,44 @@
             above_avg_queryselector.appendChild(document.createElement("li")).innerHTML = element.nev + ": " + element.pont
         );
 
+        //4 Írja ki a legtöbbet javító csapat adatait (helyezés, csapatneve, pontszám)
+        const max_valtozas_index = objektum_tomb.reduce((accumulator, current, index) => {
+            return current.valtozas > objektum_tomb[accumulator].valtozas ? index : accumulator;
+        }, objektum_tomb[0].valtozas);
+        document.querySelector("#legtobbetjavito").appendChild(document.createElement("li")).innerHTML = 
+        objektum_tomb[max_valtozas_index].nev + ", " + objektum_tomb[max_valtozas_index].helyezes + ", " +
+        objektum_tomb[max_valtozas_index].valtozas + ", " + objektum_tomb[max_valtozas_index].pont;
+
+        //5 Adott ország szerepelt-e a ranglistán (pl. Hollandia)
+        function szerepelt_e(p_orszag) {
+            let nevek = Array.from(objektum_tomb.map(element => element.nev));
+            return nevek.includes(p_orszag);
+        }
+        document.querySelector("#szerepelte").appendChild(document.createElement("li")).innerHTML = szerepelt_e("Hollandia");
+
+        //6 Változás több mint 2
+        let tobb_mint_2 = objektum_tomb.filter(function(element) { return (element.valtozas > 2);});
+        let tobb_mint_2_queryselector = document.querySelector("#tobbmint_ketto");
+        tobb_mint_2.map( element =>
+            tobb_mint_2_queryselector.appendChild(document.createElement("li")).innerHTML = element.nev + ": " + element.valtozas
+        );
+
+        //7 Melyik változás hányszor szerepel a táblázatban (csak azokat, amik legalább kétszer szerepelnek)
+        let valtozas_legalabb_ketszer = new Map();
+        for (let i = 0; i < objektum_tomb.length;++i) {
+            if (!valtozas_legalabb_ketszer.has(objektum_tomb[i].valtozas)) {
+                valtozas_legalabb_ketszer.set(objektum_tomb[i].valtozas , 1);
+            } else {
+                valtozas_legalabb_ketszer.set(objektum_tomb[i].valtozas , valtozas_legalabb_ketszer.get(objektum_tomb[i].valtozas)+1);
+            }
+        }
+
+        valtozas_legalabb_ketszer.forEach(function(value, key){ if (value < 2) {valtozas_legalabb_ketszer.delete(key)}});
+        valtozas_legalabb_ketszer = new Map([...valtozas_legalabb_ketszer].sort());
+        valtozas_legalabb_ketszer_queryselector = document.querySelector("#valtozas_legalabb_ketszer");
+        for (const [key, value] of valtozas_legalabb_ketszer.entries()) {
+            valtozas_legalabb_ketszer_queryselector.appendChild(document.createElement("li")).innerHTML = key + ": " + value;
+        }
     </script>
     <style>
         table, th, td {
