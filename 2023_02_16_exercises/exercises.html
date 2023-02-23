@@ -1,0 +1,55 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023.02.16. szorgalmni</title>
+</head>
+
+<body>
+    <div>String example: Szeretem a programozást!</div>
+    <hr>
+    <div>Deletes every 2nd character:</div>
+    <ul id="delete2nd"></ul>
+    <div>Deletes every char given in the argument (example: "e"):</div>
+    <ul id="delete_argument_char"></ul>
+    <div>Deletes every vowel:</div>
+    <ul id="delete_vowels"></ul>
+    <script>
+        str_example = "Szeretem a programozást!";
+        function delete_every_second_character(p_str) {
+            let str = "";
+            for (let i = 1; i < p_str.length; ++i) {
+                if (i%2==1) {
+                    str += p_str.charAt(i);
+                }
+            }
+            return str;
+        }
+        document.querySelector("#delete2nd").innerHTML = delete_every_second_character(str_example);
+
+        function delete_every_arg_character(p_str,p_char) {
+            let str = p_str;
+            str = str.replaceAll(p_char, "");
+            return str;
+        }
+        document.querySelector("#delete_argument_char").innerHTML = delete_every_arg_character(str_example, "e");
+
+        let vowels = "aáeéiíoóöőuúüű"
+        function delete_every_vowel(p_str) {
+            let str = p_str;
+            for (let i = 0; i < vowels.length; ++i) {
+                str = str.replaceAll(vowels[i], "");
+            }
+            return str;
+        }
+        document.querySelector("#delete_vowels").innerHTML = delete_every_vowel(str_example);
+
+    </script>
+</body>
+
+</html>
