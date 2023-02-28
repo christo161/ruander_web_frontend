@@ -1,0 +1,107 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023.02.23. DOM feladatok</title>
+    <style>
+        img {
+            width:64px;
+        }
+        button {
+            display:block;
+        }
+        button, img, div, table {
+            margin-bottom: 15px;
+        }
+        th {
+            width:100px;
+            background-color: blanchedalmond;
+        }
+        td {
+            text-align: center;
+        }
+        td:nth-child(even) {
+            background-color: dodgerblue;
+        }
+        td:nth-child(odd) {
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <button id="roll">Roll</button>
+    </form>
+    <div>Roll counter:</div>
+    <table>
+        <thead>
+            <tr>
+                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>Rolls count: <span id="count">0</span></div>
+    <div>Rolls sum: <span id="sum">0</span></div>
+    <div>Rolls avg: <span id="avg">0</span></div>
+    <div id="rolls_text">Actual roll:</div>
+    <div id="actual_roll"></div>
+
+    <script>
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min )) + min;
+        }
+
+        function roll(event) {
+            event.preventDefault();
+            let random_number = random_generate_number(1,6);
+
+            let actual_roll_dom = document.querySelector("#actual_roll");
+
+            actual_roll_dom.innerHTML = "";
+            actual_roll_dom.appendChild(document.createElement("img")).setAttribute("src", "/img/dice_" + random_number + ".jpg");
+
+            roll_counts(random_number);
+            roll_sum_increment(random_number);
+            roll_avg_increment(random_number);
+        }
+        document.querySelector("button#roll").addEventListener('click', roll);
+
+        function roll_counts(actual_roll) {
+            let td_dom = document.querySelector("td:nth-child("+actual_roll+")");
+            td_dom.innerHTML = (parseInt(td_dom.innerText))+1 + "";
+
+            let roll_count_dom = document.querySelector("span#count");
+
+            roll_count_dom.innerHTML = (parseInt(roll_count_dom.innerText))+1 + "";
+        }
+
+        function roll_sum_increment(actual_roll){
+            let roll_sum_dom = document.querySelector("span#sum");
+            roll_sum_dom.innerHTML = (parseInt(roll_sum_dom.innerText))+actual_roll + "";
+
+        }
+        function roll_avg_increment(actual_roll){
+            let roll_sum = parseInt(document.querySelector("span#sum").innerText);
+            let roll_count = parseInt(document.querySelector("span#count").innerText);
+
+            let roll_avg_dom = document.querySelector("span#avg");
+
+            roll_avg_dom.innerHTML = (roll_sum/roll_count).toFixed(2) + "";
+        }
+    </script>
+</body>
+
+</html>

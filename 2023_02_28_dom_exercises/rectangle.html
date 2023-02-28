@@ -1,0 +1,82 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023.02.23. DOM feladatok</title>
+    <style>
+        #rectangle {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            width:0px;
+            height:0px;
+            border: 0px;
+        }
+        #perimeter_text, #perimeter, #area_text, #area {
+            display: none;
+        }
+
+        label, input, button {
+            display: block;
+            margin-bottom:5px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <label for="a_side">A oldal</label>
+        <input type="number" id="a_side" min="1" value="50">
+        <label for="a_side">A oldal</label>
+        <input type="number" id="b_side" min="1" value="40">
+        <button id="draw">Kirajzol</button>
+    </form>
+    <div id="rectangle"></div>
+    <div id="perimeter_text">Kerület</div>
+    <ul id="perimeter"></ul>
+    <div id="area_text">Terület</div>
+    <ul id="area"></ul>
+
+    <script>
+        function draw(event) {
+            event.preventDefault();
+            //alert("a");
+            let a_side = document.querySelector("#a_side").value;
+            let b_side = document.querySelector("#b_side").value;
+            let rectangle = document.querySelector("#rectangle");
+            rectangle.style.width = a_side + "px";
+            rectangle.style.height = b_side + "px";
+            rectangle.style.border = "1px solid black";
+
+            draw_perimeter_area(a_side,b_side);
+
+        }
+        document.querySelector("button#draw").addEventListener('click',draw);
+
+        function perimeter(a_side,b_side) {
+            return 2*a_side+2*b_side;
+        }
+        function area(a_side,b_side) {
+            return a_side*b_side;
+        }
+
+        function draw_perimeter_area(a_side,b_side) {
+            let perimeter_dom = document.querySelector("#perimeter");
+            let area_dom = document.querySelector("#area");
+            document.querySelector("#perimeter_text").style.display = "block";
+            perimeter_dom.style.display = "block";
+            document.querySelector("#area_text").style.display = "block";
+            area_dom.style.display = "block";
+            perimeter_dom.innerHTML = ""; //remove previous child
+            perimeter_dom.appendChild(document.createElement("li")).innerHTML = perimeter(a_side,b_side);
+            area_dom.innerHTML = ""; //remove previous child
+            area_dom.appendChild(document.createElement("li")).innerHTML = area(a_side,b_side);
+        }
+    </script>
+</body>
+
+</html>
