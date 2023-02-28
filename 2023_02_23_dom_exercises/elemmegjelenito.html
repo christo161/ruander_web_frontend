@@ -1,0 +1,47 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023.02.23. feladatok</title>
+    <style>
+        #element {
+            display: block;
+            width: 250px;
+            height: 250px;
+            border: 1px solid black;
+            margin: auto;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <button id="show">Megjelenítés/elrejtés</button>
+    </form>
+
+    <div id="element" style="display:block"></div>
+
+    <script>
+        function show(event) {
+            event.preventDefault();
+            let element = document.querySelector("#element");
+            let display = element.style.display;
+            if( display == "block") {
+                element.setAttribute("style","display:none");
+            } else if (display == "none") {
+                element.setAttribute("style","display:block");
+            }
+        }
+
+
+        document.querySelector("button#show").addEventListener("click", show)
+    </script>
+</body>
+
+</html>

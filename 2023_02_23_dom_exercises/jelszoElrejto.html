@@ -1,0 +1,65 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023.02.23. feladatok</title>
+    <style>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #szem {
+            position: relative;
+            top: 10px;
+            display: inline-block;
+            overflow: auto;
+            width: 32px;
+            height: 32px;
+        }
+
+        input[type=text],
+        input[type=password] {
+            display: inline-block;
+            overflow: auto;
+            height: 32px;
+        }
+
+        button {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <label for="jelszo">Felhasználó jelszava</label>
+        <input type="password" id="jelszo" placeholder="Kis-, nagybetű és szám" required value="12345">
+        <img src="zart_szem.png" alt="Elrejtett jelszó" title="Jelszó megjelenítése" id="szem">
+        <button>Beküldés</button>
+    </form>
+    <script>
+        szem.addEventListener("click", password_state);
+        function password_state() {
+            let state = jelszo.getAttribute("type");
+            if (state == "password") {
+                jelszo.setAttribute("type", "text");
+                szem.setAttribute("src", "nyitott_szem.png");
+                szem.setAttribute("alt", "Megjelenített jelszó");
+                szem.setAttribute("title", "Jelszó elrejtése");
+            } else {
+                jelszo.setAttribute("type", "password");
+                szem.setAttribute("src", "zart_szem.png");
+                szem.setAttribute("alt", "Elrejtett jelszó");
+                szem.setAttribute("title", "Jelszó megjelenítése");
+            }
+        }
+    </script>
+</body>
+
+</html>
