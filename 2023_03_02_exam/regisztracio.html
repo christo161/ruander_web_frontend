@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="telekocsi.css">
+    <title>Telekocsi</title>
+</head>
+<body>
+    <div class="tartalom">
+        <h1>Telekocsi</h1>
+        <div class="menu">
+            <ul>
+                <li><a href="telekocsi.html" alt="Bemutatkozás">Bemutatkozás</a></li>
+                <li>Sofőröknek</li>
+                <li>Utasoknak</li>
+                <li>Bejelentkezés</li>
+                <li>Regisztráció</li>
+            </ul>
+        </div>
+        <h2>Regisztráció</h2>
+        <div id="form">
+            <form action="">
+                <label for="name">Név</label>
+                <input type="text" id="name"><br>
+                <label for="email">E-mail cím</label>
+                <input type="email" name="email" id="email"><br>
+                <label for="pass1">Jelszó</label>
+                <input type="password" name="pass1" id="pass1"><br>
+                <label for="">Jelszó ismét</label>
+                <input type="password" name="pass2" id="pass2"><br>
+                <button id="save">Mentés</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function validate(event) {
+            event.preventDefault();
+            let pass1_value = document.querySelector("input#pass1").value;
+            let pass2_value = document.querySelector("input#pass2").value;
+            if (pass1_value == "") {
+                alert("Jelszó1 nincs kitöltve!");
+            } else if (pass2_value == "") {
+                alert("Jelszó2 nincs kitöltve!");
+            } else if (pass1_value != pass2_value) {
+                alert("A két jelszó nem egyezik!");
+            }
+        }
+        document.querySelector("button#save").addEventListener("click", validate);
+    </script>
+</body>
+</html>
