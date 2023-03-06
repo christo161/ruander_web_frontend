@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click me</title>
+    <style>
+        #clickme {
+            border:2px solid black;
+            background-color: grey;
+            width:100px;
+            height: 20px;
+            text-align: center;
+            margin: 15px;
+            padding: 15px;
+            position:absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+    <div id="clickme">Click me</div>
+    <script>
+        let clickme_dom = document.querySelector("div#clickme");
+        let window_width = window.innerWidth;
+        let window_height = window.innerHeight;
+
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min) + min);
+        }
+
+        function position_change() {
+            //alert(window_height);
+            //alert(window.screen.outerHeight);
+            //alert(window.screen.availHeight);
+            clickme_dom.style.top = random_generate_number(0,window_height -50) + "px";
+            clickme_dom.style.left = random_generate_number(0,window_width -130) + "px";
+        }
+        clickme_dom.addEventListener("click",position_change);
+    </script>
+</body>
+</html>
