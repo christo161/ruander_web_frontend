@@ -1,0 +1,59 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom animáció</title>
+    <style>
+        #rectangle {
+            width: 300px;
+            height: 150px;
+            background-color: red;
+            animation-name: animation_from;
+            animation-duration: 2s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes animation_from {
+            from {
+                background-color: red;
+            }
+
+            to {
+                background-color: yellow;
+            }
+        }
+
+        @keyframes animation_to {
+            from {
+                background-color: yellow;
+            }
+
+            to {
+                background-color: red;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#rectangle').addEventListener('click', () =>  {
+                    let state = document.querySelector("#rectangle").style.animationName;
+                    if (state == "animation_from") {
+                        document.querySelector("#rectangle").style.animationName = "animation_to";
+                    } else /*if (state == "animation_to")*/ {
+                        document.querySelector("#rectangle").style.animationName = "animation_from";
+                    }
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="rectangle"></div>
+</body>
+
+</html>

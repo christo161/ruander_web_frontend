@@ -1,0 +1,53 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>halmazállapot változás</title>
+    <style>
+        img {
+            display:block;
+            width:100px;
+            height:100px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            input_dom = document.querySelector('#input_example');
+            
+            img_dom = document.querySelector('#img_example');
+
+            p_range_value = document.querySelector('#range_value');
+            
+            input_dom.addEventListener('change', () => {
+                p_range_value.innerHTML = input_dom.value;
+                if (parseInt(input_dom.value) <= 0) {
+                    img_dom.src="img/ice.jpg";
+                    img_dom.alt="Jég";
+                    img_dom.title="Szilárd halmazállapot";
+                } else if ((parseInt(input_dom.value) > 0) && (parseInt(input_dom.value) < 100)) {
+                    img_dom.src="img/water.jpg";
+                    img_dom.alt="Víz";
+                    img_dom.title="Folyékony halmazállapot";
+                } else /*if (parseInt(input_dom.value) > 100)*/ {
+                    img_dom.src="img/steam.jpg";
+                    img_dom.alt="Gőz";
+                    img_dom.title="Légnemű halmazállapot";
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <input type="range" name="" id="input_example" value="0" min="-273" max="300">
+    <p id="range_value">0</p>
+    <img src="img/ice.jpg" alt="" id="img_example">
+</body>
+
+</html>

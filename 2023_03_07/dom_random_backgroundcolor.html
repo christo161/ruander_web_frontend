@@ -1,0 +1,38 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random háttérszín generáló</title>
+    <style>
+        /*html,body {
+            height: 100%;
+        }*/
+        body {
+            background-color: rgb(0, 0, 0);
+        }
+    </style>
+    <script>
+        function random_generate_number(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+
+
+            document./*querySelector('body').*/addEventListener('click', () => {
+                document.body.style.backgroundColor = 'rgb(' + random_generate_number(0, 255) + ','
+                    + random_generate_number(0, 255) + ','
+                    + random_generate_number(0, 255) + ')';
+            });
+        });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
