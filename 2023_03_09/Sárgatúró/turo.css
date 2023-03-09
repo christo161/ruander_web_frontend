@@ -1,0 +1,63 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+p {
+    text-align: justify;
+}
+
+input[type=number] {
+    width: 40px;
+    margin: 0px 15px;
+    color: forestgreen;
+    font-size: 18px;
+}
+
+ul {
+    list-style-type: square;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#keret{
+    width: 70%;
+    padding: 20px;
+    margin:auto;
+    border-style: none solid;
+	border-color:gray;
+    border-width: 20px;
+}
+.ritka{
+    letter-spacing: 4px;
+}
+#kep{
+    width:40%;
+    margin: 30px;
+    box-shadow: 8px 8px 5px gray;
+    -ms-transform: rotate(5deg); /* IE 9 */
+    -webkit-transform: rotate(5deg); /* Chrome, Safari, Opera */
+    transform: rotate(5deg);
+    border-width: 3px;
+    border-radius: 10px;
+    border-style: solid;
+    float:right;
+}
+input{
+    font-family:cursive; 
+    font-weight: bold;
+    border-radius: 5px;   
+}
+body{
+    font-family: cursive;
+    background-image: url("hatter.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
