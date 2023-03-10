@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>színválasztó</title>
     <style>
-        html, body {
-            height:100%;
-            margin:0px;
+        html,
+        body {
+            height: 100%;
+            margin: 0px;
         }
 
         body {
-            background-color: rgb(0,0,0);
+            background-color: rgb(0, 0, 0);
             color: white;
         }
 
@@ -21,53 +23,64 @@
         }*/
 
         #rgb_container {
-            height:100%;
-            position:relative;
+            height: 100%;
+            position: relative;
         }
+
         #rgb {
-            position:absolute;
-            top:30%;
-            left:40%;
+            position: absolute;
+            top: 30%;
+            left: 40%;
             font-size: 50px;
         }
 
         input[type=range] {
-            display:block;
+            display: block;
         }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            document.addEventListener("change", () => {
-                let red_value = document.querySelector("input[type=range]#red").value;
-                let green_value = document.querySelector("input[type=range]#green").value;
-                let blue_value = document.querySelector("input[type=range]#blue").value;
-
-                //label spans
-                document.querySelector("label[for=red] span").innerHTML = red_value;
-                document.querySelector("label[for=green] span").innerHTML = green_value;
-                document.querySelector("label[for=blue] span").innerHTML = blue_value;
-
-                //center spans
-                document.querySelector("div#rgb span#red").innerHTML = red_value;
-                document.querySelector("div#rgb span#green").innerHTML = green_value;
-                document.querySelector("div#rgb span#blue").innerHTML = blue_value;
-
-                //render bgcolor
-                const dom_body = document.querySelector("body");
-                dom_body.style.backgroundColor = `rgb(${red_value},${green_value},${blue_value})`;
-
-                //render color
-                const half = 255/2;
-                if (red_value > half || green_value > half || blue_value > half) {
-                    dom_body.style.color = "black";
-                } else {
-                    dom_body.style.color = "white";
-                }
-            })
-            
+            document.addEventListener("change", render_color);
         });
+
+        const get_rgb_data = () => {
+            //return rgb object
+            return {
+                red: parseInt(document.querySelector("input[type=range]#red").value),
+                green: parseInt(document.querySelector("input[type=range]#green").value),
+                blue: parseInt(document.querySelector("input[type=range]#blue").value)
+            };
+        }
+
+        const render_color = () => {
+            //use rgb object
+            const fetched_color = get_rgb_data();
+
+            //print label values
+            document.querySelector("label[for=red] span").innerHTML = fetched_color.red;
+            document.querySelector("label[for=green] span").innerHTML = fetched_color.green;
+            document.querySelector("label[for=blue] span").innerHTML = fetched_color.blue;
+
+            //print center values
+            document.querySelector("div#rgb span#red").innerHTML = fetched_color.red;
+            document.querySelector("div#rgb span#green").innerHTML = fetched_color.green;
+            document.querySelector("div#rgb span#blue").innerHTML = fetched_color.blue;
+
+            //render bgcolor
+            const dom_body = document.querySelector("body");
+            dom_body.style.backgroundColor = `rgb(${fetched_color.red},${fetched_color.green},${fetched_color.blue})`;
+
+            //render color
+            const half = 255 / 2;
+            if (fetched_color.red > half || fetched_color.green > half || fetched_color.blue > half) {
+                dom_body.style.color = "black";
+            } else {
+                dom_body.style.color = "white";
+            }
+        }
     </script>
 </head>
+
 <body>
     <div id="range_container">
         <label for="red">red: <span>0</span></label>
@@ -77,6 +90,9 @@
         <label for="blue">blue: <span>0</span></label>
         <input type="range" name="rgb" id="blue" min="0" max="255" value="0">
     </div>
-    <div id="rgb_container"><div id="rgb">rgb(<span id="red">0</span>,<span id="green">0</span>,<span id="blue">0</span>);</div></div>
+    <div id="rgb_container">
+        <div id="rgb">rgb(<span id="red">0</span>,<span id="green">0</span>,<span id="blue">0</span>);</div>
+    </div>
 </body>
+
 </html>
