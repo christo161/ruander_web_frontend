@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kovács Ádám, 2023. 03. 14. vizsga</title>
+    <script src="dolgozoAdatok.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const add_to_list = (id, content1, content2) => {
+                document.querySelector("#" + id).appendChild(document.createElement("li")).innerHTML = content1 + "<span class='red'>" + content2 + "</span>";
+            }
+
+            //Feladat1
+            const KockaFelszin = (a) => 6 * a ** 2;
+
+            //Feladat1 tesztek
+            add_to_list("kocka_felszin", "KockaFelszin(2): ", KockaFelszin(2));
+            add_to_list("kocka_felszin", "KockaFelszin(3): ", KockaFelszin(3));
+            add_to_list("kocka_felszin", "KockaFelszin(5): ", KockaFelszin(5));
+
+            //Feladat2
+            const KockaTerfogat = (a) => Math.pow(a, 3);
+
+            //Feladat2 tesztek
+            add_to_list("kocka_terfogat", "KockaTerfogat(2): ", KockaTerfogat(2));
+            add_to_list("kocka_terfogat", "KockaTerfogat(3): ", KockaTerfogat(3));
+            add_to_list("kocka_terfogat", "KockaTerfogat(5): ", KockaTerfogat(5));
+
+            //Feladat3
+            const PhErtek = (vizsgaltErtek) => {
+                if (vizsgaltErtek == 7) {
+                    return "semleges";
+                } else if (vizsgaltErtek < 7) {
+                    return "savas";
+                } else if (vizsgaltErtek > 7) {
+                    return "lúgos";
+                }
+            }
+
+            //Feladat3 tesztek
+            add_to_list("ph_ertek", "PhErtek(9): ", PhErtek(9));
+            add_to_list("ph_ertek", "PhErtek(5.5): ", PhErtek(5.5));
+            add_to_list("ph_ertek", "PhErtek(7): ", PhErtek(7));
+
+            //Feladat4
+            const ElsoNSzamOsszege = (szamokMenyisege) => {
+                if (szamokMenyisege != 0) {
+                    return szamokMenyisege + ElsoNSzamOsszege(szamokMenyisege - 1);
+                } else {
+                    return 0;
+                }
+            }
+
+            //Feladat4 tesztek
+            add_to_list("elso_n_szam_osszege", "ElsoNSzamOsszege(3): ", ElsoNSzamOsszege(3));
+            add_to_list("elso_n_szam_osszege", "ElsoNSzamOsszege(10): ", ElsoNSzamOsszege(10));
+            add_to_list("elso_n_szam_osszege", "ElsoNSzamOsszege(21): ", ElsoNSzamOsszege(21));
+
+            //Feladat5
+            const MaxParos = (vizsgaltTomb) => {
+                let max_paros = undefined;
+                for (let i = 0; i < vizsgaltTomb.length; ++i) {
+                    if (max_paros == undefined && vizsgaltTomb[i] % 2 == 0) {
+                        max_paros = vizsgaltTomb[i];
+                    } else if (vizsgaltTomb[i] % 2 == 0 && vizsgaltTomb[i] > max_paros) {
+                        max_paros = vizsgaltTomb[i];
+                    }
+                }
+                if (max_paros == undefined) return "nincs a tömbben páros szám";
+                return max_paros;
+            }
+
+            //Feladat5 tesztek
+            add_to_list("max_even", "MaxParos([12,3,7,19,21]): ", MaxParos([12, 3, 7, 19, 21]));
+            add_to_list("max_even", "MaxParos([28,14,2,42,69]): ", MaxParos([28, 14, 2, 42, 69]));
+            add_to_list("max_even", "MaxParos([32,21,54,33,21]): ", MaxParos([32, 21, 54, 33, 21]));
+            add_to_list("max_even", "MaxParos([1,3,5,8,4,2]): ", MaxParos([1, 3, 5, 8, 4, 2]));
+            add_to_list("max_even", "MaxParos([1,3,5]): ", MaxParos([1, 3, 5]));
+
+            //Feladat6
+            const MaganHangzokSzama = (vizsgaltSzoveg) => {
+                const stringof_maganhagzok = "aáeéiíoóöőuúüű";
+                const arrayof_vizsgaltszoveg = vizsgaltSzoveg.split("");
+                let maganhangzok = 0;
+                arrayof_vizsgaltszoveg.forEach((element) => {
+                    if (stringof_maganhagzok.includes(element)) { ++maganhangzok; }
+                });
+                return maganhangzok;
+            };
+
+            //Feladat6 tesztek
+            add_to_list("maganhangzok_szama",
+                'MaganHangzokSzama("Szeretem a programozást"): ', MaganHangzokSzama("Szeretem a programozást"));
+            add_to_list("maganhangzok_szama",
+                'MaganHangzokSzama("Géza kék az ég"): ', MaganHangzokSzama("Géza kék az ég"));
+            add_to_list("maganhangzok_szama",
+                'MaganHangzokSzama("Répa, retek, mogyoró"): ', MaganHangzokSzama("Répa, retek, mogyoró"));
+
+            //Feladat7
+            const SzovegVisszafele = (szoveg) => {
+                let arrayof_szoveg = szoveg.split("");
+                arrayof_szoveg.reverse();
+                let stringof_reverse = arrayof_szoveg.join("");
+                return stringof_reverse;
+            }
+
+            //Feladat7 tesztek
+            add_to_list("szoveg_visszafele",
+                'SzovegVisszafele("Szeretem a programozás"): ', SzovegVisszafele("Szeretem a programozást"));
+            add_to_list("szoveg_visszafele",
+                'SzovegVisszafele("Géza kék az ég"): ', SzovegVisszafele("Géza kék az ég"));
+            add_to_list("szoveg_visszafele",
+                'SzovegVisszafele("Répa, retek, mogyoró"): ', SzovegVisszafele("Répa, retek, mogyoró"));
+
+            //Feladat8
+            const CegAtlagEletkor = (vizsgaltObjektum) => {
+                return (vizsgaltObjektum.reduce(
+                    (osszeg, aktualis_ertek) => osszeg + aktualis_ertek.kor,
+                    0 /*kezdoertek*/) / vizsgaltObjektum.length).toFixed(0);
+            };
+
+            //Feladat8 teszt
+            add_to_list("ceg_atlageletkor", 'CegAtlagEletkor(Dolgozok): ', CegAtlagEletkor(Dolgozok));
+
+        });
+    </script>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>1. kocka felszín:</h1>
+    <li id="kocka_felszin"></li>
+    <h1>2. kocka térfogat:</h1>
+    <li id="kocka_terfogat"></li>
+    <h1>3. PH érték:</h1>
+    <li id="ph_ertek"></li>
+    <h1>4. első N szám összege:</h1>
+    <li id="elso_n_szam_osszege"></li>
+    <h1>5. legnagyobb páros szám tömbbből:</h1>
+    <li id="max_even"></li>
+    <h1>6. magánhangzók száma:</h1>
+    <li id="maganhangzok_szama"></li>
+    <h1>7. szöveg visszafelé:</h1>
+    <li id="szoveg_visszafele"></li>
+    <h1>8. cég átlagéletkor:</h1>
+    <li id="ceg_atlageletkor"></li>
+</body>
+
+</html>
