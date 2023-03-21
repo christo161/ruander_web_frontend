@@ -1,3 +1,5 @@
+<!-- please notice that this is only practice, not guide, so certainly it can be done better -->
+<!-- figyelem: ez csak egy gyakorló feladat, nem útmutató, természetesen szebben is meg lehetne oldani -->
 <!DOCTYPE html>
 <html lang="hu">
 
@@ -5,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kovács Ádám, dom szintfelmérő</title>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             //feladat1
@@ -46,9 +48,9 @@
                 let input_email_dom_1 = document.querySelector("input[type='email']#email1");
                 let input_email_dom_2 = document.querySelector("input[type='email']#email2");
 
-                //const email_pattern = new RegExp(document.querySelector("input[type='email']#email1").getAttribute("pattern"));
-                //const email_pattern = `/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i`;
-                //const email_pattern = input_email_dom_1.getAttribute("pattern");
+                //const email_pattern = /^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i;
+                const email_pattern = input_email_dom_1.getAttribute("pattern");
+                //const email_pattern = new RegExp(input_email_dom_1.getAttribute("pattern"));
                 //const email_pattern = new RegExp(input_email_dom_1.getAttribute("pattern"), 'g');
 
                 if (input_email_dom_1.value == "" && input_email_dom_2.value == "") {
@@ -67,12 +69,10 @@
                     input_email_dom_1.style.backgroundColor = "red";
                     input_email_dom_2.style.backgroundColor = "red";
                     alert("A két mező tartalma nem egyezik!");
-                //} else if (!(input_email_dom_1.value).match(email_pattern) ) {
-                } else if (!/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/.test(input_email_dom_1.value) ) {
+                } else if (!(input_email_dom_1.value).match(email_pattern) ) {
+                //} else if (!/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/.test(input_email_dom_1.value) ) {
                     input_email_dom_1.style.backgroundColor = "red";
                     input_email_dom_2.style.backgroundColor = "red";
-                    //alert(input_email_dom_1.value);
-                    //alert(email_pattern);
                     alert("Nem megfelelő az e-mail cím formátuma!");
                 } else {
                     input_email_dom_1.style.backgroundColor = "white";
@@ -147,9 +147,12 @@
     <img src="hidingCat.jpg" alt="hiding cat" title="hiding cat">
     <h1>Feladat 4</h1>
     <label for="email1">E-mail:</label>
-    <input type="email" name="" id="email1" pattern="/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i">
+    <input type="email" name="" id="email1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+    <!-- not working
+        <input type="email" name="" id="email1" pattern="/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i">
+    -->
     <label for="email2">E-mail megerősítése:</label>
-    <input type="email" name="" id="email2" pattern="/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i">
+    <input type="email" name="" id="email2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
     <button>Verify</button>
 </body>
 
