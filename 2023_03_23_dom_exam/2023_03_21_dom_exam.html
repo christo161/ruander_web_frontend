@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            //feladat1
+            let first_input_dom = document.querySelector("input:nth-of-type(1)");
+            first_input_dom.addEventListener("input", () => {
+                document.querySelector("p#karakterszam").textContent = first_input_dom.value.length;
+            })
+
+            //feladat2
+            let input_dom_2 = document.querySelector("input:nth-of-type(2)");
+            let input_dom_3 = document.querySelector("input:nth-of-type(3)");
+            input_dom_2.setAttribute("max", window.innerWidth - 200);
+            input_dom_3.setAttribute("max", window.innerHeight - 200);
+
+            document.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
+                let rectangle_dom = document.querySelector("div#rectangle");
+                rectangle_dom.style.display = "block";
+                rectangle_dom.style.left = parseInt(input_dom_2.value) + "px";
+                rectangle_dom.style.top = parseInt(input_dom_3.value) + "px";
+            });
+
+            //feladat3
+            const button_2 = document.querySelector('button:nth-of-type(2)');
+            button_2.addEventListener('click', () => {
+                let cat_dom = document.querySelector('img[src="hidingCat.jpg"]');
+                let state = cat_dom.style.animationName;
+                if (state == "animation_from") {
+                    cat_dom.style.animationName = "animation_to";
+                    button_2.innerHTML = "Draw";
+                } else /*if (state == "animation_to")*/ {
+                    cat_dom.style.animationName = "animation_from";
+                    button_2.innerHTML = "Hide";
+                }
+            });
+
+            //feladat4
+            document.querySelector('button:nth-of-type(3)').addEventListener('click', () => {
+                let input_email_dom_1 = document.querySelector("input[type='email']#email1");
+                let input_email_dom_2 = document.querySelector("input[type='email']#email2");
+
+                //const email_pattern = new RegExp(document.querySelector("input[type='email']#email1").getAttribute("pattern"));
+                //const email_pattern = `/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i`;
+                //const email_pattern = input_email_dom_1.getAttribute("pattern");
+                //const email_pattern = new RegExp(input_email_dom_1.getAttribute("pattern"), 'g');
+
+                if (input_email_dom_1.value == "" && input_email_dom_2.value == "") {
+                    input_email_dom_1.style.backgroundColor = "red";
+                    input_email_dom_2.style.backgroundColor = "red";
+                    alert("Nincs kitöltve egyik mező sem!");
+                } else if (input_email_dom_1.value == "") {
+                    input_email_dom_1.style.backgroundColor = "red";
+                    input_email_dom_2.style.backgroundColor = "white";
+                    alert("Nincs kitöltve az e-mail mező!");
+                } else if (input_email_dom_2.value == "") {
+                    input_email_dom_1.style.backgroundColor = "white";
+                    input_email_dom_2.style.backgroundColor = "red";
+                    alert("Nincs kitöltve az e-mail megerősítése mező!");
+                } else if (input_email_dom_1.value != input_email_dom_2.value) {
+                    input_email_dom_1.style.backgroundColor = "red";
+                    input_email_dom_2.style.backgroundColor = "red";
+                    alert("A két mező tartalma nem egyezik!");
+                //} else if (!(input_email_dom_1.value).match(email_pattern) ) {
+                } else if (!/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/.test(input_email_dom_1.value) ) {
+                    input_email_dom_1.style.backgroundColor = "red";
+                    input_email_dom_2.style.backgroundColor = "red";
+                    //alert(input_email_dom_1.value);
+                    //alert(email_pattern);
+                    alert("Nem megfelelő az e-mail cím formátuma!");
+                } else {
+                    input_email_dom_1.style.backgroundColor = "white";
+                    input_email_dom_2.style.backgroundColor = "white";
+                    alert("Adatok rögzítése sikeres!");
+                }
+            });
+        });
+    </script>
+    <style>
+        input,
+        label,
+        button {
+            display: block;
+        }
+
+        div#rectangle {
+            display: none;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 200px;
+            height: 200px;
+            ;
+            border: 1px solid black;
+            background-color: red;
+        }
+
+        img[src="hidingCat.jpg"] {
+            width: 100px;
+            opacity: 0;
+            animation-name: none;
+            animation-duration: 4s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes animation_from {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes animation_to {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Feladat 1</h1>
+    <input type="text">
+    <p id="karakterszam">0</p>
+    <h1>Feladat 2</h1>
+    <label for="x_coord">X:</label>
+    <input type="number" min="0" id="x_coord" value="500">
+    <label for="y_coord">Y:</label>
+    <input type="number" min="0" id="y_coord" value="400">
+    <button>Draw</button>
+    <div id="rectangle"></div>
+    <h1>Feladat 3</h1>
+    <button>Draw</button>
+    <img src="hidingCat.jpg" alt="hiding cat" title="hiding cat">
+    <h1>Feladat 4</h1>
+    <label for="email1">E-mail:</label>
+    <input type="email" name="" id="email1" pattern="/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i">
+    <label for="email2">E-mail megerősítése:</label>
+    <input type="email" name="" id="email2" pattern="/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i">
+    <button>Verify</button>
+</body>
+
+</html>
