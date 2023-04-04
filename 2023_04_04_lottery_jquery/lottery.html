@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const generate_random = (min, max) => {
+                return Math.round(Math.random() * (max - min)) + min;
+            };
+
+            const lottery5 = () => {
+                return generate_random(1, 90);
+            };
+
+            let winner_numbers = [];
+            const draw = () => {
+                winner_numbers = [];
+                while (winner_numbers.length != 5) {
+                    let winner_number = lottery5();
+                    if (!winner_numbers.includes(winner_number)) {
+                        winner_numbers.push(winner_number);
+                    }
+                }
+            }
+
+            const render_table = () => {
+                const lottery_dom = document.querySelector("tbody:nth-of-type(1)");
+                lottery_dom_innerHTML = "";
+                for (let i = 0; i < 9; ++i) {
+                    lottery_dom_innerHTML += "<tr>";
+                    for (let j = 1; j <= 10; ++j) {
+                        const cell_number = i * 10 + j;
+                        lottery_dom_innerHTML += `<td ${winner_numbers.includes(cell_number) ? "class='winner'" : ""}>${cell_number}</td>`;
+                    }
+                    lottery_dom_innerHTML += "</tr>";
+                }
+                lottery_dom.innerHTML = lottery_dom_innerHTML;
+            };
+
+            document.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
+                draw();
+                render_table();
+            });
+
+            render_table();
+        });
+    </script>
+    <style>
+        td {
+            background-color: silver;
+        }
+
+        .winner {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tbody>
+        </tbody>
+    </table>
+    <button>Draw</button>
+</body>
+
+</html>
