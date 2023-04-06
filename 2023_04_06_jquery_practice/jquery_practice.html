@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery practice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("button:nth-of-type(1)").click(function(){
+                $("div:nth-of-type(1)").slideToggle({
+                });
+
+            });
+
+            $("input:nth-of-type(1)").on('input', function(){
+                $("p:nth-of-type(1)").text(() => {
+                    return $("input:nth-of-type(1)").val().length;
+                });
+            });
+
+            $("button:nth-of-type(2)").click(() => {
+                $("input:nth-of-type(2)").attr("type", (_, attr) => attr == "text" ? "password" : "text");
+            });
+
+            $("input:nth-of-type(3)").on('input', function(){
+                $("p:nth-of-type(2)").text(() => {
+                    if ($("input:nth-of-type(3)").val() < 0) {
+                        return "szilárd";
+                    } else if ( $("input:nth-of-type(3)").val() >=0 
+                    && $("input:nth-of-type(3)").val() <= 100 ) {
+                        return "folyékony";
+                    } else if ( $("input:nth-of-type(3)").val() > 100 ) {
+                        return "légnemű";
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        div:nth-of-type(1) {
+            height:100px;
+            background-color: #666;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feladat 1</h1>
+    <div></div>
+    <button>Hide/Show</button>
+    <h1>Feladat 2</h1>
+    <input type="text">
+    <p></p>
+    <h1>Feladat 3</h1>
+    <input type="text" value="12345">
+    <button>Password/Text</button>
+    <h1>Feladat 4</h1>
+    <input type="number" min="-273" max="200">
+    <p></p>
+</body>
+</html>
