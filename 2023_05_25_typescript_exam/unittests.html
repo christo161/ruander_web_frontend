@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unittests</title>
+    <script src="countaccents_camelcase_printprimes.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+            const unit_test = (p_test_name, p_test_result) => {
+                let table = document.querySelector("table:nth-of-type(1)");
+                let a_row = table.insertRow(1);
+                let test_name = a_row.insertCell(0);
+                let test_result = a_row.insertCell(1);
+                test_name.innerHTML = `${p_test_name}`;
+                test_result.innerHTML = `${p_test_result}`;
+            }
+
+            const exercise_01 = () => {
+                try {
+                    if (count_accents("árvíztűrő tükörfúrógép") == 9) {
+                        unit_test("count_accents('árvíztűrő tükörfúrógép')", "Success");
+                    }
+                    else {
+                        unit_test("count_accents('árvíztűrő tükörfúrógép')", "Fail");
+                    }
+                }
+                catch {
+                    unit_test("count_accents('árvíztűrő tükörfúrógép')", "Error");
+                }
+            }
+
+            const exercise_02 = () => {
+                try {
+                    if (convert_camelcase("szo1 szo2 szo3 szo4") == "szo1Szo2Szo3Szo4") {
+                        unit_test("convert_camelcase('szo1 szo2 szo3 szo4')", "Success");
+                    }
+                    else {
+                        unit_test("convert_camelcase('szo1 szo2 szo3 szo4')", "Fail");
+                    }
+                }
+                catch {
+                    unit_test("convert_camelcase('szo1 szo2 szo3 szo4')", "Error");
+                }
+            }
+
+            const exercise_03 = () => {
+                try {
+                    if (JSON.stringify(print_primes([1,2,3,4,5,6,7,8])) == JSON.stringify([2,3,5,7]) ) {
+                        unit_test("print_primes([1,2,3,4,5,6,7,8])", "Success");
+                    }
+                    else {
+                        alert( JSON.stringify(print_primes([1,2,3,4,5,6,7,8])) );
+                        unit_test("print_primes([1,2,3,4,5,6,7,8])", "Fail");
+                    }
+                }
+                catch {
+                    unit_test("print_primes([1,2,3,4,5,6,7,8])", "Error");
+                }
+            }
+
+            exercise_01();
+            exercise_02();
+            exercise_03();
+        });
+    </script>
+</head>
+
+<body>
+    <table id="unit_test_table">
+        <thead>
+            <tr>
+                <th>Teszt neve</th>
+                <th>Teszt eredménye</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    
+</body>
+
+</html>
