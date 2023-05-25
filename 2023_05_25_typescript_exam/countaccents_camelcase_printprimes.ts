@@ -5,10 +5,10 @@ const count_accents = (p_text: string): number => {
 }
 
 const convert_camelcase = (p_text: string): string => {
-    return p_text.split(" ").map((element, index) => { return index == 0 ? 
+    return p_text.split(" ").map((element, index) => index == 0 ? 
         element.toLowerCase() :
         element.charAt(0).toUpperCase() +
-        element.slice(1).toLowerCase() }).join("");
+        element.slice(1).toLowerCase() ).join("");
 }
 
 const isprime = (p_number: number): boolean => {
