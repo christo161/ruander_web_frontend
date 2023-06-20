@@ -1,0 +1,12 @@
+<h2>Interpolation</h2>
+<p>{{str_example}}</p>
+<h2>Property binding</h2>
+<p><a [href]="property_example">Favorite tutorial page</a></p>
+<h2>Event binging</h2>
+<button type="button" (click)="event_binding_example()">Event binding example</button>
+<h2>2way databinding example</h2>
+<label for="input_number_example"></label>
+<input type="number" [(ngModel)]="num_example" id="input_number_example">
+<p>Side A of a square: {{num_example}}</p>
+<p>4*A: {{4*num_example}}</p>
+<p>A*A: {{num_example*num_example}}</p>
