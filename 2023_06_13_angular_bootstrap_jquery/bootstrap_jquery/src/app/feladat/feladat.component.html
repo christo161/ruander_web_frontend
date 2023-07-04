@@ -1,0 +1,10 @@
+<h2>Is prime?</h2>
+<p><input type="number" name="" id="p_number" [(ngModel)]="m_number" min="0"></p>
+<p><button type="button" class="btn btn-success" (click)="save_results()">Prím-e?</button></p>
+<!--{{m_number}} {{result}}.</p>-->
+<p>{{m_number}} is {{print_prime()}}.</p>
+<ul>
+    <li *ngFor="let element of results">
+        {{element}}
+    </li>
+</ul>
