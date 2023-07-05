@@ -1,0 +1,22 @@
+<h2>Array of objects elements</h2>
+<h3>First element</h3>
+<p>Name: {{Dolgozok[0].nev}}, Age: {{Dolgozok[0].kor}},
+     Salary: {{Dolgozok[0].fizetes}}, Job: {{Dolgozok[0].beosztas}}</p>
+<table class="table table-light table-striped table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Job</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let element of Dolgozok">
+            <td>{{element.nev}}</td>
+            <td>{{element.kor}}</td>
+            <td>{{element.fizetes}}</td>
+            <td>{{element.beosztas}}</td>
+        </tr>
+    </tbody>
+</table>
