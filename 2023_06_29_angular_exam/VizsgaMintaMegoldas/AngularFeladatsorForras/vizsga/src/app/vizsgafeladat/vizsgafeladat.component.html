@@ -1,0 +1,12 @@
+<h2>Angular modul megoldása</h2>
+<p><label for="sulyInput">Add meg a súlyod kilógrammban:</label></p>
+<p><input type="number" [(ngModel)]="suly_var" min="0" class="form-control" id="sulyInput"></p>
+<p><label for="magassag">Add meg a magasságod méterben:</label></p>
+<p><input type="number" [(ngModel)]="magassag_var" min="0" class="form-control" id="magassag"></p>
+<p><button type="button" class="btn btn-success form-control" (click)="save_tti()">Eredmény mentése</button></p>
+<p>A megadott értékek alapján a testtömegindex: {{get_tti()}}</p>
+<ul>
+    <li *ngFor="let element of ttis">
+        {{element}}
+    </li>
+</ul>
