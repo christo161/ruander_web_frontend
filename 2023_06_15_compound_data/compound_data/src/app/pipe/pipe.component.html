@@ -1,0 +1,39 @@
+<h2>Pipe, |, AltGr+W</h2>
+<!--<p>{{ input value | output value's pipe}}</p>-->
+<h3>Text processing</h3>
+
+<h4>Text example: {{text_example}}</h4>
+<p>lowercase: {{text_example|lowercase}}</p>
+<p>uppercase: {{text_example|uppercase}}</p>
+<p>titlecase: {{text_example|titlecase}}</p>
+
+<h4>Number example: {{number_example}}</h4>
+<p>ParseInt: {{number_example | number: '1.0-0'}}</p>
+<p>Leading zero: {{number_example | number: '3.0-0'}}</p>
+<p>4 decimals: {{number_example | number: '1.0-4'}}</p>
+
+<h4>Percent</h4>
+<p>{{number_example | percent: '1.0-0'}}</p>
+<p>{{number_example | percent: '1.0-4'}}</p>
+
+<h4>Currency</h4>
+<p>Currency example: {{currency_example | currency: "EUR"}}</p>
+<p>Currency example: {{currency_example | currency: "USD"}}</p>
+<p>Currency example: {{currency_example | currency: "GBP"}}</p>
+<p>Currency example: {{currency_example | currency: "HUF"}}</p>
+
+<h4>Date</h4>
+<p>Date example: {{date_example}}</p>
+<p>Short: {{date_example | date: 'short'}}</p>
+<p>Long: {{date_example | date: 'long'}}</p>
+<p>Short (only date): {{date_example | date: 'shortDate'}}</p>
+<p>Long (only date): {{date_example | date: 'longDate'}}</p>
+<p>YYYY: {{date_example | date: 'YYYY'}}</p>
+<p>MM: {{date_example | date: 'MM'}}</p>
+<p>dd: {{date_example | date: 'dd'}}</p>
+<p>YYYY.MM.dd.: {{date_example | date: 'YYYY.MM.dd.'}}</p>
+<p>hh: {{date_example | date: 'hh'}}</p>
+<p>mm: {{date_example | date: 'mm'}}</p>
+<p>ss: {{date_example | date: 'ss'}}</p>
+<p>hh:mm:ss: {{date_example | date: 'hh:mm:ss'}}</p>
+<p>HH:mm:ss: {{date_example | date: 'HH:mm:ss'}}</p>
