@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slider</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            //the number of last image
+            const last_img_number = 3;
+
+            //example: 1,2,3,4,5... if 5 is the last, 1 comes after 5
+            const number_change = (p_string) => {
+
+                //last char of p_string is the number of image
+                const last_char = parseInt(p_string.charAt(p_string.length-1));
+
+                if (last_char == last_img_number) {
+                    return p_string.slice(0,-1) + 1;
+                } else {
+                    return p_string.slice(0,-1) + (last_char+1);
+                }
+            }
+
+            const slider = () => {
+                //the full url:
+                let img_src = document.querySelector("img:nth-of-type(1)").src;
+                
+                //the url except the characters before ".jpg"
+                //last char of this is the number of image
+                const img_src_first = img_src.slice(0,-4);
+
+                //new url
+                const new_url = number_change(img_src_first) + ".jpg";
+
+                //change to new url
+                document.querySelector("img:nth-of-type(1)").src = new_url;
+
+                //this executes slider() 3secs after slider() ended
+                setTimeout(slider, 3000);
+            };
+
+            //this executes slider() once after 3secs
+            setTimeout(slider, 3000);
+        });
+    </script>
+    <style>
+        img {
+            width: 450px;
+        }
+    </style>
+</head>
+<body>
+    <img src="img1.jpg" alt="">
+</body>
+</html>
